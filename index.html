@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+
+    <title>Mind The Pad</title>
+    <base href="/" target="_blank">
+  
+<!-- FONT
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/skeleton.css">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://d3js.org/d3.v4.min.js"></script>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="twelve columns" style="margin-top: 15%" id='body-container'>
+      
+          <h1>Mind The Pad – CNNs Can Develop Blind Spots</h1>
+          <h5>Bilal Alsallakh, Narine Kokhlikyan, Vivek Miglani, Jun Yuan, Orion Reblitz-Richardson</h5>
+          <b>Preprint on arXiv: <a href="https://arxiv.org/pdf/2010.02178.pdf">https://arxiv.org/pdf/2010.02178.pdf</a></b><br>
+          <b>Repository on github: </b><br>
+          <b>Supplemental material (code, data, results): </b><br>
+      
+          <br><br>
+          <p>
+            [Placeholder] We show how feature maps in convolutional networks are susceptible to spatial bias. Due to a combination of architectural choices, the activation at certain locations is systematically elevated or weakened. The major source of this bias is the padding mechanism. Depending on several aspects of convolution arithmetic, this mechanism can apply the padding unevenly, leading to asymmetries in the learned weights. We demonstrate how such bias can be detrimental to certain tasks such as small object detection: the activation is suppressed if the stimulus lies in the impacted area, leading to blind spots and misdetection. We propose solutions to mitigate spatial bias and demonstrate how they can improve model accuracy.
+          </p>
+
+          <h3>Padding And Foveation Behavior of CNNs</h3>
+
+          <p>[placeholder]</p>
+          <div class="twelve columns">
+            <img src="image/foveation_all.png" style="width: 960px;">
+          </div>
+          <p>[placeholder] All illustrations use a stride of 1. Except for <i>VALID</i>, all configurations warrant SAME padding.</p>
+
+          <div class="tab">
+            <button class="tablinks active" onclick="selectTab(event, 'valid')">
+              <img src="/image/valid.png">
+              <span>VALID</span>
+            </button>
+            <button class="tablinks" onclick="selectTab(event, 'zero')">
+              <img src="/image/zero.png">
+              <span>Zero</span>
+            </button>
+            <button class="tablinks" onclick="selectTab(event, 'circular')">
+              <img src="/image/circular.png">
+              <span>Circular</span>
+            </button>
+            <button class="tablinks" onclick="selectTab(event, 'symmetric')">
+              <img src="/image/symmetric.png">
+              <span>Mirror (SYMMETRIC)</span>
+            </button>
+         <!--    <button class="tablinks" onclick="selectTab(event, 'symmetric2')">
+              <img src="/image/symmetric.png">
+              <span>SYMMETRIC 2</span>
+            </button>
+            <button class="tablinks" onclick="selectTab(event, 'symmetric3')">
+              <img src="/image/symmetric.png">
+              <span>SYMMETRIC 3</span>
+            </button> -->
+            <button class="tablinks" onclick="selectTab(event, 'reflect')">
+              <img src="/image/reflect.png">
+              <span>Mirror (REFLECT)</span>
+            </button>
+            <button class="tablinks" onclick="selectTab(event, 'replicate')">
+              <img src="/image/replicate.png">
+              <span>Replication</span>
+            </button>
+            <button class="tablinks" onclick="selectTab(event, 'partial_conv')">
+              <img src="/image/partial_conv.png">
+              <span>Partial Convolution</span>
+            </button>
+          </div>
+
+          <div id="valid" class="tabcontent" style="display: block;">
+            <h4>VALID Padding (3x3 kernal)</h4>
+            <p>[placeholder - expl.] no padding</p>
+
+            <div style='display: flex; flex-direction: row;'>
+              <div class="summary_div">
+                <p><b>Input (left top corner of an image):</b></p>
+                <table id="valid_input">
+                  <tbody></tbody>
+                </table>
+              </div>
+
+              <div class="summary_div">
+                <p><b>Number of conv ops each pixel is involved in:</b></p>
+                <table id="valid_totops"><tbody></tbody></table>
+              </div>
+            </div>
+
+            <div>
+              <p>
+                <b>Illustration</b><br>
+              </p>
+
+              <div style='display: flex; flex-direction: row;'>
+                <table id="valid_demo" class="summary_div"><tbody></tbody></table>
+
+                <p> select pixel <span id="valid_select"> ___ </span>.  <br>
+                Display the no.<span id="valid_turn"> ___ </span> convolution involved.</p>
+              </div>
+            </div>
+          </div>
+
+          <div id="zero" class="tabcontent">
+            <h4>Zero Padding (3x3 kernal)</h4>
+            <p>[placeholder - expl.] 0 padding</p>
+            
+            <div style='display: flex; flex-direction: row;'>
+              <div class="summary_div">
+                <p><b>Input (left top corner of an image):</b></p>
+                <table id="zero_input">
+                  <tbody></tbody>
+                </table>
+              </div>
+
+              <div class="summary_div">
+                <p><b>Number of conv ops each pixel is involved in:</b></p>
+                <table id="zero_totops"><tbody></tbody></table>
+              </div>
+            </div>
+
+            <div>
+              <p>
+                <b>Illustration</b><br>
+              </p>
+
+              <div style='display: flex; flex-direction: row;'>
+                <table id="zero_demo" class="summary_div"><tbody></tbody></table>
+
+                <p> select pixel <span id="zero_select"> ___ </span>.  <br>
+                Display the no.<span id="zero_turn"> ___ </span> convolution involved.</p>
+              </div>
+            </div>
+          </div>
+
+          <div id="circular" class="tabcontent">
+            <h4>Circular Padding (3x3 kernal)</h4>
+          </div>
+
+          <div id="symmetric" class="tabcontent">
+            <h4> Mirror Padding (SYMMETRIC)</h4>
+          </div>
+
+          <div id="reflect" class="tabcontent">
+            <h4> Mirror Padding (REFLECT) (3x3 kernal)</h4>
+          </div>
+
+          <div id="replicate" class="tabcontent">
+            <h4>Replication Padding (5x5 kernal)</h4>
+          </div>
+
+          <div id="partial_conv" class="tabcontent">
+            <h4>Partial Convolution (3x3 kernal)</h4>
+          </div>
+
+          <!-- <div style="display: flex; flex-direction: row; justify-content: space-between;">
+            <div id="demo" class="five columns">
+              <svg id="conv" style="height: 500px; width: 500px;"></svg>
+            </div>
+            <div id="control_panel" style="display: flex; width: 400px; justify-content: flex-start; flex-direction: row; flex-wrap: wrap">
+                
+            </div>
+          </div> -->
+          
+
+          <br><br>
+          <h3>Take-aways and suggestions</h3>
+          <p>[placeholder]</p>
+
+      </div>
+    </div>
+
+  </body>
+
+  <script type="text/javascript" src="js/vis.js"></script>
+  <script type="text/javascript" src="js/main.js"></script>
+  </html>
