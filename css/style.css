@@ -51,5 +51,22 @@ td{
 }
 
 .summary_div {
-  margin: 0 20px;
+  margin: 10px 20px;
+}
+
+.center_div {
+  flex-direction: column;
+  align-items: center;
+  margin: 10px 20px;
+}
+
+.input_table {
+  cursor: pointer;
+}
+
+.big_icon {
+  width: 64px;
+  height: 64px;
+  float: left;
+  padding:0 20px 
 }

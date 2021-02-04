@@ -34,10 +34,8 @@
 
           <h3>Padding And Foveation Behavior of CNNs</h3>
 
-          <p>[placeholder]</p>
-          <div class="twelve columns">
-            <img src="image/foveation_all.png" style="width: 960px;">
-          </div>
+          <p>[placeholder] This interactive visual tool demonstrates how different padding strategies work, and how it leads to spatial bias in CNNs.</p>
+
           <p>[placeholder] All illustrations use a stride of 1. Except for <i>VALID</i>, all configurations warrant SAME padding.</p>
 
           <div class="tab">
@@ -81,22 +79,37 @@
 
           <div id="valid" class="tabcontent" style="display: block;">
             <h4>VALID Padding (3x3 kernal)</h4>
-            <p>[placeholder - expl.] no padding</p>
+
+            <p>
+              <img src="/image/valid.png" class="big_icon">
+              No padding. This strategy assumes that all the dimensions are valid, that is, the input image gets fully covered by a filter and the stride specified. 
+              <br>
+              This algorithm is illustrated on a 3 × 3 kernel without dilation. A larger kernel size or dilation factor will increase the foveation effect.
+            </p>
 
             <div style='display: flex; flex-direction: row;'>
               <div class="summary_div">
                 <p><b>Input (left top corner of an image):</b></p>
-                <table id="valid_input">
+                <table id="valid_input" class="input_table">
                   <tbody></tbody>
                 </table>
               </div>
 
               <div class="summary_div">
-                <p><b>Number of conv ops each pixel is involved in:</b></p>
+                <p><b>#conv_ops each pixel is involved in:</b></p>
                 <table id="valid_totops"><tbody></tbody></table>
+              </div>
+
+               <div id="valid_overview" class="center_div">
+                <p>
+                  <b>Overview of used cells:</b>
+                </p>
+                <table id="valid_used" class="summary_div"><tbody></tbody></table>
+                <p>sum = <span id='valid_used_sum'></span></p>
               </div>
             </div>
 
+            
             <div>
               <p>
                 <b>Illustration</b><br>
@@ -109,23 +122,39 @@
                 Display the no.<span id="valid_turn"> ___ </span> convolution involved.</p>
               </div>
             </div>
+             
+
+
           </div>
 
           <div id="zero" class="tabcontent">
             <h4>Zero Padding (3x3 kernal)</h4>
-            <p>[placeholder - expl.] 0 padding</p>
+            <p>
+              <img src="/image/zero.png" class="big_icon"> 
+              Zero padding strategy refers to adding a border of pixels all with value zero around the edges of the input images. This strategy allows us to preserve the original input size.
+              <br>
+              This algorithm is illustrated on a 3 × 3 kernel without dilation. A larger kernel size or dilation factor will increase the foveation effect.
+            </p>
             
             <div style='display: flex; flex-direction: row;'>
               <div class="summary_div">
                 <p><b>Input (left top corner of an image):</b></p>
-                <table id="zero_input">
+                <table id="zero_input" class="input_table">
                   <tbody></tbody>
                 </table>
               </div>
 
               <div class="summary_div">
-                <p><b>Number of conv ops each pixel is involved in:</b></p>
+                <p><b>#conv_ops each pixel is involved in:</b></p>
                 <table id="zero_totops"><tbody></tbody></table>
+              </div>
+
+              <div id="zero_overview" class="center_div">
+                <p>
+                  <b>Overview of used cells:</b><br>
+                </p>
+                <table id="zero_used" class="summary_div"><tbody></tbody></table>
+                <p>sum = <span id='zero_used_sum'></span></p>
               </div>
             </div>
 
@@ -145,33 +174,222 @@
 
           <div id="circular" class="tabcontent">
             <h4>Circular Padding (3x3 kernal)</h4>
+            <p>
+              <img src="/image/circular.png" class="big_icon"> 
+
+              This algorithm is illustrated on a 3 × 3 kernel without dilation. It is straightforward to prove that the algorithm warrants equal treatment of the pixels irrespective of the kernel size or dilation factor. 
+              <br> 
+              This is because it effectively applies circular convolution: Once the kernel hits one side, it can seamlessly operate on the pixels of the other side. Circular convolution hence renders the feature map as infinite to the kernel, warranting that edge pixels are treated in the same manner as interior pixels.
+            </p>
+            
+            <div style='display: flex; flex-direction: row;'>
+              <div class="summary_div">
+                <p><b>Input (left top corner of an image):</b></p>
+                <table id="circular_input" class="input_table">
+                  <tbody></tbody>
+                </table>
+              </div>
+
+              <div class="summary_div">
+                <p><b>Number of conv ops each pixel is involved in:</b></p>
+                <table id="circular_totops"><tbody></tbody></table>
+              </div>
+
+              <div id="circular_overview" class="center_div">
+                <p>
+                  <b>Overview of used cells:</b><br>
+                </p>
+                <table id="circular_used" class="summary_div"><tbody></tbody></table>
+                <p>sum = <span id='circular_used_sum'></span></p>
+              </div>
+            </div>
+
+            <div>
+              <p>
+                <b>Illustration</b><br>
+              </p>
+
+              <div style='display: flex; flex-direction: row;'>
+                <table id="circular_demo" class="summary_div"><tbody></tbody></table>
+
+                <p> select pixel <span id="circular_select"> ___ </span>.  <br>
+                Display the no.<span id="circular_turn"> ___ </span> convolution involved.</p>
+              </div>
+            </div>
           </div>
 
           <div id="symmetric" class="tabcontent">
             <h4> Mirror Padding (SYMMETRIC)</h4>
+            <p>
+              <img src="/image/symmetric.png" class="big_icon"> 
+              This algorithm warrants that each pixel is involved in the same number of convolutional operations. It is important to notice that, unlike under circular convolution, these operations do not utilize the kernel pixels uniformly as we demonstrate in detail.
+            </p>
+            
+            <div style='display: flex; flex-direction: row;'>
+              <div class="summary_div">
+                <p><b>Input (left top corner of an image):</b></p>
+                <table id="symmetric_input" class="input_table">
+                  <tbody></tbody>
+                </table>
+              </div>
+
+              <div class="summary_div">
+                <p><b>Number of conv ops each pixel is involved in:</b></p>
+                <table id="symmetric_totops"><tbody></tbody></table>
+              </div>
+
+              <div id="symmetric_overview" class="center_div">
+                <p>
+                  <b>Overview of used cells:</b><br>
+                </p>
+                <table id="symmetric_used" class="summary_div"><tbody></tbody></table>
+                <p>sum = <span id='zero_used_sum'></span></p>
+              </div>
+            </div>
+
+            <div>
+              <p>
+                <b>Illustration</b><br>
+              </p>
+
+              <div style='display: flex; flex-direction: row;'>
+                <table id="symmetric_demo" class="summary_div"><tbody></tbody></table>
+
+                <p> select pixel <span id="symmetric_select"> ___ </span>.  <br>
+                Display the no.<span id="symmetric_turn"> ___ </span> convolution involved.</p>
+              </div>
+            </div>
           </div>
 
           <div id="reflect" class="tabcontent">
             <h4> Mirror Padding (REFLECT) (3x3 kernal)</h4>
+            <p>
+              <img src="/image/reflect.png" class="big_icon"> 
+              This algorithm is illustrated on a 3 × 3 kernel without dilation.
+            </p>
+            
+            <div style='display: flex; flex-direction: row;'>
+              <div class="summary_div">
+                <p><b>Input (left top corner of an image):</b></p>
+                <table id="reflect_input" class="input_table">
+                  <tbody></tbody>
+                </table>
+              </div>
+
+              <div class="summary_div">
+                <p><b>Number of conv ops each pixel is involved in:</b></p>
+                <table id="reflect_totops"><tbody></tbody></table>
+              </div>
+
+              <div id="reflect_overview" class="center_div">
+                <p>
+                  <b>Overview of used cells:</b><br>
+                </p>
+                <table id="reflect_used" class="summary_div"><tbody></tbody></table>
+                <p>sum = <span id='reflect_used_sum'></span></p>
+              </div>
+            </div>
+
+            <div>
+              <p>
+                <b>Illustration</b><br>
+              </p>
+
+              <div style='display: flex; flex-direction: row;'>
+                <table id="reflect_demo" class="summary_div"><tbody></tbody></table>
+
+                <p> select pixel <span id="reflect_select"> ___ </span>.  <br>
+                Display the no.<span id="reflect_turn"> ___ </span> convolution involved.</p>
+              </div>
+            </div>
           </div>
 
           <div id="replicate" class="tabcontent">
             <h4>Replication Padding (5x5 kernal)</h4>
+            <p>
+              <img src="/image/replicate.png" class="big_icon"> 
+              This algorithm is illustrated on a 5 × 5 kernel without dilation. We choose this kernel size since a 3×3 kernel under SAME padding would render the algorithm equivalent to SYMMETRIC mirror padding.
+            </p>
+            
+            <div style='display: flex; flex-direction: row;'>
+              <div class="summary_div">
+                <p><b>Input (left top corner of an image):</b></p>
+                <table id="replicate_input" class="input_table">
+                  <tbody></tbody>
+                </table>
+              </div>
+
+              <div class="summary_div">
+                <p><b>Number of conv ops each pixel is involved in:</b></p>
+                <table id="replicate_totops"><tbody></tbody></table>
+              </div>
+
+              <div id="replicate_overview" class="center_div">
+                <p>
+                  <b>Overview of used cells:</b><br>
+                </p>
+                <table id="replicate_used" class="summary_div"><tbody></tbody></table>
+                <p>sum = <span id='replicate_used_sum'></span></p>
+              </div>
+            </div>
+
+            <div>
+              <p>
+                <b>Illustration</b><br>
+              </p>
+
+              <div style='display: flex; flex-direction: row;'>
+                <table id="replicate_demo" class="summary_div"><tbody></tbody></table>
+
+                <p> select pixel <span id="replicate_select"> ___ </span>.  <br>
+                Display the no.<span id="replicate_turn"> ___ </span> convolution involved.</p>
+              </div>
+            </div>
           </div>
 
           <div id="partial_conv" class="tabcontent">
             <h4>Partial Convolution (3x3 kernal)</h4>
+            <p>
+              <img src="/image/partial_conv.png" class="big_icon"> 
+              This algorithm is illustrated on a 3 × 3 kernel without dilation. Its foveation behavior is analogous to REFLECT mirror padding.
+            </p>
+            
+            <div style='display: flex; flex-direction: row;'>
+              <div class="summary_div">
+                <p><b>Input (left top corner of an image):</b></p>
+                <table id="partial_conv_input" class="input_table">
+                  <tbody></tbody>
+                </table>
+              </div>
+
+              <div class="summary_div">
+                <p><b>Number of conv ops each pixel is involved in:</b></p>
+                <table id="partial_conv_totops"><tbody></tbody></table>
+              </div>
+
+              <div id="partial_conv_overview" class="center_div">
+                <p>
+                  <b>Overview of used cells:</b><br>
+                </p>
+                <table id="partial_conv_used" class="summary_div"><tbody></tbody></table>
+                <p>sum = <span id='partial_conv_used_sum'></span></p>
+              </div>
+            </div>
+
+            <div>
+              <p>
+                <b>Illustration</b><br>
+              </p>
+
+              <div style='display: flex; flex-direction: row;'>
+                <table id="partial_conv_demo" class="summary_div"><tbody></tbody></table>
+
+                <p> select pixel <span id="partial_conv_select"> ___ </span>.  <br>
+                Highlight the weighted kernel cells: <span id="partial_conv_turn"> ___ </span>.</p>
+              </div>
+            </div>
           </div>
 
-          <!-- <div style="display: flex; flex-direction: row; justify-content: space-between;">
-            <div id="demo" class="five columns">
-              <svg id="conv" style="height: 500px; width: 500px;"></svg>
-            </div>
-            <div id="control_panel" style="display: flex; width: 400px; justify-content: flex-start; flex-direction: row; flex-wrap: wrap">
-                
-            </div>
-          </div> -->
-          
 
           <br><br>
           <h3>Take-aways and suggestions</h3>
@@ -181,7 +399,7 @@
     </div>
 
   </body>
-
+  <script type="text/javascript" src="js/const.js"></script>
   <script type="text/javascript" src="js/vis.js"></script>
   <script type="text/javascript" src="js/main.js"></script>
   </html>
