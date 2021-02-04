@@ -29,15 +29,7 @@ demo_display = {
  	'partial_conv': [[6.25, 8.75, 7.5, 7.5 ], [8.75, 12.25, 10.5, 10.5], [7.5, 10.5, 9, 9], [7.5, 10.5, 9, 9]],
  }
 
- let used_display = {
- 	'valid': [[" ", " ", " "], [" ", " ", " "], [" ", " ", " "]],
- 	'zero': [["", "", ""], ["", "", ""], ["", "", ""]],
- 	'circular': [["", "", ""], ["", "", ""], ["", "", ""]],
- 	'symmetric': [["", "", ""], ["", "", ""], ["", "", ""]],
- 	'reflect': [["", "", ""], ["", "", ""], ["", "", ""]],
- 	'replicate': [["", "", ""], ["", "", ""], ["", "", ""]],
- 	'partial_conv': [["", "", ""], ["", "", ""], ["", "", ""]],
- }
+ let used_display = [[" ", " ", " "], [" ", " ", " "], [" ", " ", " "]];
 
  let display_size = {
  	'valid': 3,
@@ -57,7 +49,7 @@ demo_display = {
  	'partial_conv': 1,
  }
 
- let rendered = {}
+ let rendered = {}, calculated = false, used_x, used_y, x_plus;
 
  let select_pixel = {}, timer;
  let kernal_size = 3, rendered_conv = 0, st_x, st_y, select_x, select_y, select_val;
@@ -119,6 +111,9 @@ function initialize_static_table(opt,) {
 
 				// update summary overview
 				update_used_table(opt);
+				calculated = false;
+				x_plus = false;
+				used_x = 0, used_y = -1;
 
 				// render animation 
 				rendered_conv = 0;
@@ -189,7 +184,7 @@ function initialize_static_table(opt,) {
 
 	// render used base
 	let used_table = d3.select(`#${opt}_used tbody`);
-	used_display[opt].forEach((row, i) => {
+	used_display.forEach((row, i) => {
 		used_table.append('tr')
 			.selectAll('td')
 			.data(row).enter()
@@ -209,60 +204,26 @@ function update_used_table(opt) {
 
 	// calculate the used cells
 	let count = 0;
-	updated_used_display = Array.from(used_display[opt]);
 
 	// rendering
-	updated_used_display.forEach((row, i) => {
+	used_display.forEach((row, i) => {
 		row.forEach((val, j) => {
-			d3.select(`${opt}-used-${i}-${j}`)
+			d3.select(`#${opt}-used-${i}-${j}`)
+				.style('background-color', 'white')
 				.html(val);
 		});
 	});
 
 	// sum
-	d3.select(`${opt}_used_sum`)
-		.html(count)
-}
-
-function update_demo(opt) {
-	if (opt !== 'valid' && opt!=='zero') {
-		update_demo_complex(opt);
-		return;
-	}
-	let max_y = Math.min(select_y, demo_display[opt].length - kernal_size)+pad_size[opt];
-
-	let step = max_y - st_y + 1;
-
-	let ii = st_x + Math.floor(rendered_conv / step), jj = st_y + (rendered_conv % step);
-
-	d3.selectAll(`#${opt}_demo td`)
-		.style('background-color', 'white');
-
-	for (let x = ii; x < ii+display_size[opt]; x++) {
-		for (let y = jj; y < jj+display_size[opt]; y++) {
-			if (d3.select(`#${opt}-demo-${x}-${y}`).html() !== select_val) {
-				d3.select(`#${opt}-demo-${x}-${y}`)
-					.style('background-color', demo_background);
-			} else {
-				d3.select(`#${opt}-demo-${x}-${y}`)
-					.style('background-color', highlight_background);
-			}
-		}
-	}
-
-	rendered_conv++;
-	d3.select(`#${opt}_turn`)
-		.html(rendered_conv);
-
-	if (rendered_conv == tot_conv_involved[opt][select_x][select_y]) {
-		rendered_conv = 0;
-	}
+	d3.select(`#${opt}_used_sum`)
+		.html('___')
 }
 
 function find_the_next_conv(opt) {
 	let contain = false;
 	if (rendered_conv == 0) {
 		last_y = 0, last_x = 0;
+		used_x = 0, used_y = -1;
 	}
 	while (last_x < demo_display[opt].length && last_y < demo_display[opt][0].length) {
 		for (let x = last_x; x < last_x+display_size[opt]; x++) {
@@ -274,17 +235,24 @@ function find_the_next_conv(opt) {
 			if (contain) break;
 		}
 		if (contain) break;
+
 		last_y++;
 		if (last_y + display_size[opt] > demo_display[opt][0].length) {
 			last_y = 0;
 			last_x ++;
+			x_plus = true;
 		}
 	}
 }
 
-function update_demo_complex(opt) {
+function update_demo(opt) {
 	// find the next involved conv
 	find_the_next_conv(opt);
+	used_y++;
+	if (x_plus) {
+		used_x ++;
+		used_y = 0;
+	}
 
 	d3.selectAll(`#${opt}_demo td`)
 		.style('background-color', 'white');
@@ -313,18 +281,38 @@ function update_demo_complex(opt) {
 		.html(count > 1 ? `${rendered_conv} to ${rendered_conv+count-1}` : rendered_conv);
 	rendered_conv += count - 1;
 
-	if (rendered_conv == tot_conv_involved[opt][select_x][select_y]) {
-		rendered_conv = 0;
+	// rendering
+	if (!calculated) {
+		d3.select(`#${opt}-used-${used_x}-${used_y}`)
+			.html(count);
+	} else {
+		d3.selectAll(`#${opt}_used td`)
+			.style('background-color', 'white');
+		d3.select(`#${opt}-used-${used_x}-${used_y}`)
+			.style('background-color', highlight_background)
 	}
+
+	x_plus = false;
 	last_y++;
 	if (last_y + display_size[opt] > demo_display[opt][0].length) {
 		last_y = 0;
 		last_x ++;
+		x_plus = true;
+	}	
+
+	if (rendered_conv == tot_conv_involved[opt][select_x][select_y]) {
+		if (!calculated) {
+			d3.select(`#${opt}_used_sum`)
+				.html(rendered_conv);
+		}
+		calculated = true;
+		rendered_conv = 0;
+		used_x = 0, used_y = -1;
+		x_plus = false;
 	}
 }
 
 function update_demo_partial(opt) {
-	// find the next involved conv
 	count = 0;
 	for (let x = last_x; x < last_x+display_size[opt]; x++) {
 		for (let y = last_y; y < last_y+display_size[opt]; y++) {
@@ -345,6 +333,7 @@ function update_demo_partial(opt) {
 
 	if (Math.abs(rendered_conv - tot_conv_involved[opt][select_x][select_y]) < 1e-7) {
 		rendered_conv = 0;
+		calculated = true;
 	}
 	last_y++;
 	if (last_y + display_size[opt] > demo_display[opt][0].length) {
