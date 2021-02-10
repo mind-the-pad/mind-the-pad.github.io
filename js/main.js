@@ -2,6 +2,8 @@ let default_opt = 'valid';
 let baseColors = d3.interpolatePlasma,
     colorScale = {};
 
+let paused = true;
+
 function main() {
   render_convolution(default_opt);
 
@@ -65,16 +67,20 @@ function click_symmetric(evt, val) {
   render_convolution('symmetric');
 }
 
-function click_play() {
-
+function click_play(evt, opt) {
+  window.clearInterval(timer);
+  timer = window.setInterval(() => update_demo(opt), 500); 
 }
 
-function click_pause() {
-
+function click_pause(evt, opt) {
+  window.clearInterval(timer);
+  paused = true;
 }
 
-function click_next() {
-
+function click_next(evt, opt) {
+  if (paused) {
+    update_demo(opt);
+  }
 }
 
 main()
