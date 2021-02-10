@@ -65,5 +65,16 @@ function click_symmetric(evt, val) {
   render_convolution('symmetric');
 }
 
+function click_play() {
+
+}
+
+function click_pause() {
+
+}
+
+function click_next() {
+
+}
 
 main()

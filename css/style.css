@@ -10,6 +10,13 @@
   height: 16px;
 }
 
+input {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid #ccc;
+}
+
 /* Style the buttons that are used to open the tab content */
 .tab button {
   background-color: inherit;
@@ -39,6 +46,11 @@
 /* Create an active/current tablink class */
 .opts.active {
   background-color: #ccc;
+}
+
+.play.active {
+  border-radius: 50%;
+  border: 1px solid black;
 }
 
 /* Style the tab content */
