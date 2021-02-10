@@ -32,6 +32,15 @@
   background-color: #ccc;
 }
 
+.opts:hover {
+  background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+.opts.active {
+  background-color: #ccc;
+}
+
 /* Style the tab content */
 .tabcontent {
   display: none;

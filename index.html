@@ -8,7 +8,7 @@
   
 <!-- FONT
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
 
   <link rel="stylesheet" href="css/normalize.css">
   <link rel="stylesheet" href="css/skeleton.css">
@@ -224,7 +224,16 @@
               <img src="/image/symmetric.png" class="big_icon"> 
               This algorithm warrants that each pixel is involved in the same number of convolutional operations. It is important to notice that, unlike under circular convolution, these operations do not utilize the kernel pixels uniformly as we demonstrate in detail.
             </p>
-            
+            <button class="opts active" onclick="click_symmetric(event, 1)">
+              3x3 kernel, 1px padding
+            </button>
+            <button class="opts" onclick="click_symmetric(event, 2)">
+              5x5 kernel, 2px padding
+            </button>  
+            <button class="opts" onclick="click_symmetric(event, 3)">
+              3x3 kernel, 1px padding, dilation factor = 2
+            </button>  
+
             <div style='display: flex; flex-direction: row;'>
               <div class="summary_div">
                 <p><b>Input (left top corner of an image):</b></p>
@@ -265,7 +274,7 @@
             <h4> Mirror Padding (REFLECT) (3x3 kernal)</h4>
             <p>
               <img src="/image/reflect.png" class="big_icon"> 
-              This algorithm is illustrated on a 3 × 3 kernel without dilation.
+              This algorithm is illustrated on a 3 × 3 kernel without dilation. <br><br>
             </p>
             
             <div style='display: flex; flex-direction: row;'>
@@ -400,6 +409,7 @@
 
   </body>
   <script type="text/javascript" src="js/const.js"></script>
+  <script type="text/javascript" src="js/util.js"></script>
   <script type="text/javascript" src="js/vis.js"></script>
   <script type="text/javascript" src="js/main.js"></script>
   </html>
