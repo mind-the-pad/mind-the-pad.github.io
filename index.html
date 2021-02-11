@@ -80,32 +80,34 @@
           <div id="valid" class="tabcontent" style="display: block;">
             <h4>VALID Padding (3x3 kernal)</h4>
 
-            <p>
-              <img src="/image/valid.png" class="big_icon">
-              No padding. This strategy assumes that all the dimensions are valid, that is, the input image gets fully covered by a filter and the stride specified. 
-              <br>
-              This algorithm is illustrated on a 3 × 3 kernel without dilation. A larger kernel size or dilation factor will increase the foveation effect.
-            </p>
+            <div style='display: flex; flex-direction: column;'>
+              <p>
+                <img src="/image/valid.png" class="big_icon">
+                No padding. This strategy assumes that all the dimensions are valid, that is, the input image gets fully covered by a filter and the stride specified. 
+                <br>
+                This algorithm is illustrated on a 3 × 3 kernel without dilation. A larger kernel size or dilation factor will increase the foveation effect.
+              </p>
 
-            <div style='display: flex; flex-direction: row;'>
-              <div class="summary_div">
-                <p><b>Input (left top corner of an image):</b></p>
-                <table id="valid_input" class="input_table">
-                  <tbody></tbody>
-                </table>
-              </div>
+              <div style='display: flex; flex-direction: row;'>
+                <div class="summary_div">
+                  <p><b>Input (left top corner of an image):</b></p>
+                  <table id="valid_input" class="input_table">
+                    <tbody></tbody>
+                  </table>
+                </div>
 
-              <div class="summary_div">
-                <p><b>#conv_ops each pixel is involved in:</b></p>
-                <table id="valid_totops"><tbody></tbody></table>
-              </div>
+                <div class="summary_div">
+                  <p><b>#conv_ops each pixel is involved in:</b></p>
+                  <table id="valid_totops"><tbody></tbody></table>
+                </div>
 
-               <div id="valid_overview" class="center_div">
-                <p>
-                  <b>Overview of used cells:</b>
-                </p>
-                <table id="valid_used" class="summary_div"><tbody></tbody></table>
-                <p>sum = <span id='valid_used_sum'></span></p>
+                 <div id="valid_overview" class="center_div">
+                  <p>
+                    <b>Overview of used cells:</b>
+                  </p>
+                  <table id="valid_used" class="summary_div"><tbody></tbody></table>
+                  <p>sum = <span id='valid_used_sum'></span></p>
+                </div>
               </div>
             </div>
 
@@ -137,32 +139,35 @@
 
           <div id="zero" class="tabcontent">
             <h4>Zero Padding (3x3 kernal)</h4>
-            <p>
-              <img src="/image/zero.png" class="big_icon"> 
-              Zero padding strategy refers to adding a border of pixels all with value zero around the edges of the input images. This strategy allows us to preserve the original input size.
-              <br>
-              This algorithm is illustrated on a 3 × 3 kernel without dilation. A larger kernel size or dilation factor will increase the foveation effect.
-            </p>
-            
-            <div style='display: flex; flex-direction: row;'>
-              <div class="summary_div">
-                <p><b>Input (left top corner of an image):</b></p>
-                <table id="zero_input" class="input_table">
-                  <tbody></tbody>
-                </table>
-              </div>
+            <div style='display: flex; flex-direction: column;'>
 
-              <div class="summary_div">
-                <p><b>#conv_ops each pixel is involved in:</b></p>
-                <table id="zero_totops"><tbody></tbody></table>
-              </div>
+              <p>
+                <img src="/image/zero.png" class="big_icon"> 
+                Zero padding strategy refers to adding a border of pixels all with value zero around the edges of the input images. This strategy allows us to preserve the original input size.
+                <br>
+                This algorithm is illustrated on a 3 × 3 kernel without dilation. A larger kernel size or dilation factor will increase the foveation effect.
+              </p>
+              
+              <div style='display: flex; flex-direction: row;'>
+                <div class="summary_div">
+                  <p><b>Input (left top corner of an image):</b></p>
+                  <table id="zero_input" class="input_table">
+                    <tbody></tbody>
+                  </table>
+                </div>
 
-              <div id="zero_overview" class="center_div">
-                <p>
-                  <b>Overview of used cells:</b><br>
-                </p>
-                <table id="zero_used" class="summary_div"><tbody></tbody></table>
-                <p>sum = <span id='zero_used_sum'></span></p>
+                <div class="summary_div">
+                  <p><b>#conv_ops each pixel is involved in:</b></p>
+                  <table id="zero_totops"><tbody></tbody></table>
+                </div>
+
+                <div id="zero_overview" class="center_div">
+                  <p>
+                    <b>Overview of used cells:</b><br>
+                  </p>
+                  <table id="zero_used" class="summary_div"><tbody></tbody></table>
+                  <p>sum = <span id='zero_used_sum'></span></p>
+                </div>
               </div>
             </div>
 
@@ -182,33 +187,36 @@
 
           <div id="circular" class="tabcontent">
             <h4>Circular Padding (3x3 kernal)</h4>
-            <p>
-              <img src="/image/circular.png" class="big_icon"> 
-
-              This algorithm is illustrated on a 3 × 3 kernel without dilation. It is straightforward to prove that the algorithm warrants equal treatment of the pixels irrespective of the kernel size or dilation factor. 
-              <br> 
-              This is because it effectively applies circular convolution: Once the kernel hits one side, it can seamlessly operate on the pixels of the other side. Circular convolution hence renders the feature map as infinite to the kernel, warranting that edge pixels are treated in the same manner as interior pixels.
-            </p>
+            <div style='display: flex; flex-direction: column;'>
             
-            <div style='display: flex; flex-direction: row;'>
-              <div class="summary_div">
-                <p><b>Input (left top corner of an image):</b></p>
-                <table id="circular_input" class="input_table">
-                  <tbody></tbody>
-                </table>
-              </div>
+              <p>
+                <img src="/image/circular.png" class="big_icon"> 
 
-              <div class="summary_div">
-                <p><b>Number of conv ops each pixel is involved in:</b></p>
-                <table id="circular_totops"><tbody></tbody></table>
-              </div>
+                This algorithm is illustrated on a 3 × 3 kernel without dilation. It is straightforward to prove that the algorithm warrants equal treatment of the pixels irrespective of the kernel size or dilation factor. 
+                <br> 
+                This is because it effectively applies circular convolution: Once the kernel hits one side, it can seamlessly operate on the pixels of the other side. Circular convolution hence renders the feature map as infinite to the kernel, warranting that edge pixels are treated in the same manner as interior pixels.
+              </p>
+              
+              <div style='display: flex; flex-direction: row;'>
+                <div class="summary_div">
+                  <p><b>Input (left top corner of an image):</b></p>
+                  <table id="circular_input" class="input_table">
+                    <tbody></tbody>
+                  </table>
+                </div>
 
-              <div id="circular_overview" class="center_div">
-                <p>
-                  <b>Overview of used cells:</b><br>
-                </p>
-                <table id="circular_used" class="summary_div"><tbody></tbody></table>
-                <p>sum = <span id='circular_used_sum'></span></p>
+                <div class="summary_div">
+                  <p><b>Number of conv ops each pixel is involved in:</b></p>
+                  <table id="circular_totops"><tbody></tbody></table>
+                </div>
+
+                <div id="circular_overview" class="center_div">
+                  <p>
+                    <b>Overview of used cells:</b><br>
+                  </p>
+                  <table id="circular_used" class="summary_div"><tbody></tbody></table>
+                  <p>sum = <span id='circular_used_sum'></span></p>
+                </div>
               </div>
             </div>
 
@@ -228,10 +236,15 @@
 
           <div id="symmetric" class="tabcontent">
             <h4> Mirror Padding (SYMMETRIC)</h4>
-            <p>
-              <img src="/image/symmetric.png" class="big_icon"> 
-              This algorithm warrants that each pixel is involved in the same number of convolutional operations. It is important to notice that, unlike under circular convolution, these operations do not utilize the kernel pixels uniformly as we demonstrate in detail.
-            </p>
+              <p>
+                <img src="/image/symmetric.png" class="big_icon"> 
+                This algorithm warrants that each pixel is involved in the same number of convolutional operations. It is important to notice that, unlike under circular convolution, these operations do not utilize the kernel pixels uniformly as we demonstrate in detail.
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+              </p>
             <button class="opts active" onclick="click_symmetric(event, 1)">
               3x3 kernel, 1px padding
             </button>
@@ -283,6 +296,11 @@
             <p>
               <img src="/image/reflect.png" class="big_icon"> 
               This algorithm is illustrated on a 3 × 3 kernel without dilation. <br><br>
+              <br>
+                <br>
+                <br>
+                <br>
+                <br>
             </p>
             
             <div style='display: flex; flex-direction: row;'>
@@ -326,6 +344,12 @@
             <p>
               <img src="/image/replicate.png" class="big_icon"> 
               This algorithm is illustrated on a 5 × 5 kernel without dilation. We choose this kernel size since a 3×3 kernel under SAME padding would render the algorithm equivalent to SYMMETRIC mirror padding.
+              <br>
+              <br>
+                <br>
+                <br>
+                <br>
+                <br>
             </p>
             
             <div style='display: flex; flex-direction: row;'>
@@ -369,6 +393,12 @@
             <p>
               <img src="/image/partial_conv.png" class="big_icon"> 
               This algorithm is illustrated on a 3 × 3 kernel without dilation. Its foveation behavior is analogous to REFLECT mirror padding.
+              <br>
+              <br>
+                <br>
+                <br>
+                <br>
+                <br>
             </p>
             
             <div style='display: flex; flex-direction: row;'>

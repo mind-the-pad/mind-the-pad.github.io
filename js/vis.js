@@ -217,7 +217,7 @@ function initialize_static_table(opt,) {
 		opt_max = d3.max(d3.max(tot_conv_involved[opt]));
 
 	colorScale[opt] = d3.scaleLinear()
-		.domain([opt_min, opt_max])
+		.domain([0, opt_max])
 		.range([0, 1])
 	let tot_table = d3.select(`#${opt}_totops tbody`);
 

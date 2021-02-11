@@ -69,6 +69,8 @@ input {
 td{
   border: 1px solid #ddd;
   padding: 12px 15px;
+  width: 16px;
+  height: 16px;
 }
 
 .summary_div {
@@ -86,8 +88,9 @@ td{
 }
 
 .big_icon {
-  width: 64px;
-  height: 64px;
+  width: 150px;
+  height: 150px;
   float: left;
-  padding:0 20px 
+  padding:0 20px;
+  margin: 10px 0;
 }
