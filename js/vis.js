@@ -68,7 +68,9 @@ demo_display = {
  	'reflect': 1,
  	'replicate': 2,
  	'partial_conv': 1,
- }
+ },
+ symmetric_val = 0,
+ dilation_factor = 1;
 
  let rendered = {}, calculated = true, used_x, used_y, x_plus;
 
@@ -90,10 +92,11 @@ demo_display = {
  	} else if (opt === 'symmetric'){
  		rendered[opt] = true;
  		// clear
- 		d3.selectAll('#symmetric_input tr').remove();
+ 		d3.selectAll('#symmetric_input').remove();
  		d3.selectAll('#symmetric_demo tr').remove();
  		d3.selectAll('#symmetric_totops tr').remove();
  		d3.selectAll('#symmetric_used tr').remove();
+ 		d3.select('#symmetric .summary_div img').remove();
  		// render
  		initialize_static_table(opt);
  	}
@@ -287,18 +290,21 @@ function find_the_next_conv(opt) {
 		last_y = 0, last_x = 0;
 	}
 	while (last_x < demo_display[opt].length && last_y < demo_display[opt][0].length) {
-		for (let x = last_x; x < last_x+display_size[opt]; x++) {
-			for (let y = last_y; y < last_y+display_size[opt]; y++) 
+		for (let i = 0; i < display_size[opt]; i++) {
+			for (let j = 0; j < display_size[opt]; j++) {
+				let x = last_x + i + (dilation_factor-1)*i,
+					y = last_y + j + (dilation_factor-1)*j;
 				if (d3.select(`#${opt}-demo-${x}-${y}`).html() == select_val) {
 					contain = true;
 					break;
 				}
+			}
 			if (contain) break;
 		}
 		if (contain) break;
 
 		last_y++;
-		if (last_y + display_size[opt] > demo_display[opt][0].length) {
+		if (last_y + display_size[opt] + (dilation_factor-1)*(display_size[opt]-1) > demo_display[opt][0].length) {
 			last_y = 0;
 			last_x ++;
 			x_plus = true;
@@ -320,16 +326,18 @@ function update_demo(opt) {
 
 	count = 0;
 	used_x = [], used_y = [];
-	for (let x = last_x; x < last_x+display_size[opt]; x++) {
-		for (let y = last_y; y < last_y+display_size[opt]; y++) {
+	for (let i = 0; i < display_size[opt]; i++) {
+		for (let j = 0; j < display_size[opt]; j++) {
+			let x = last_x + i + (dilation_factor-1)*i,
+			y = last_y + j + (dilation_factor-1)*j;
 			if (d3.select(`#${opt}-demo-${x}-${y}`).html() !== select_val) {
 				d3.select(`#${opt}-demo-${x}-${y}`)
 					.style('background-color', demo_background);
 			} else {
 				d3.select(`#${opt}-demo-${x}-${y}`)
 					.style('background-color', highlight_background);
-				used_x.push(x-last_x);
-				used_y.push(y-last_y);
+				used_x.push(i);
+				used_y.push(j);
 				count++;
 			}
 		}
@@ -351,7 +359,7 @@ function update_demo(opt) {
 
 	x_plus = false;
 	last_y++;
-	if (last_y + display_size[opt] > demo_display[opt][0].length) {
+	if (last_y + display_size[opt] + (dilation_factor-1)*(display_size[opt]-1) > demo_display[opt][0].length) {
 		last_y = 0;
 		last_x ++;
 		x_plus = true;
@@ -392,7 +400,7 @@ function update_demo_partial(opt) {
 		calculated = true;
 	}
 	last_y++;
-	if (last_y + display_size[opt] > demo_display[opt][0].length) {
+	if (last_y + display_size[opt] + (dilation_factor-1)*(display_size[opt]-1) > demo_display[opt][0].length) {
 		last_y = 0;
 		last_x ++;
 	}

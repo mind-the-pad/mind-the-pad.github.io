@@ -216,19 +216,22 @@ function get_tot_conv_at(opt, ii, jj, size) {
 function find_the_next_conv_for_count(opt, last_x, last_y, select_val, sum_arr) {
 	let contain = false, val = 0, count = 0, pos_x, pos_y;
 
-	while (last_x + display_size[opt]<= demo_display[opt].length) {
-		for (let x= last_x; x < last_x+display_size[opt]; x++) {
-			for (let y = last_y; y < last_y+display_size[opt]; y++) {
-				if (opt == 'partial_conv' && d3.select(`#${opt}-demo-${x}-${y}`).html() !== ' ') {
+	while (last_x + display_size[opt] + (dilation_factor-1)*(display_size[opt]-1) <= demo_display[opt].length) {
+		for (let i= 0; i < display_size[opt]; i++) {
+			for (let j = 0; j < display_size[opt]; j++) {
+				let x = last_x + i + (dilation_factor-1)*i,
+					y = last_y + j + (dilation_factor-1)*j;
+				if (opt === 'partial_conv' && d3.select(`#${opt}-demo-${x}-${y}`).html() !== ' ') {
 					count++;
 				}
-				if (d3.select(`#${opt}-demo-${x}-${y}`).html() == select_val) {
+				if (opt !== 'partial_conv' && d3.select(`#${opt}-demo-${x}-${y}`).html() == select_val) {
 					contain = true;
 					pos_x = x-last_x, pos_y = y-last_y;
 					if (opt !== 'partial_conv') {
 						val++;
 						if (sum_arr !== undefined) {
-							sum_arr[x-last_x][y-last_y]++;
+							// sum_arr[x-last_x][y-last_y]++;
+							sum_arr[i][j]++;
 						}
 					}
 				}
@@ -236,7 +239,7 @@ function find_the_next_conv_for_count(opt, last_x, last_y, select_val, sum_arr) 
 		}
 
 		last_y++;
-		if (last_y + display_size[opt] > demo_display[opt][0].length) {
+		if (last_y + display_size[opt] + (dilation_factor-1)*(display_size[opt]-1) > demo_display[opt][0].length) {
 			last_y = 0;
 			last_x ++;
 		}
@@ -255,7 +258,7 @@ function find_the_next_conv_for_count(opt, last_x, last_y, select_val, sum_arr) 
 	}
 
 	last_y++;
-	if (last_y + display_size[opt] > demo_display[opt][0].length) {
+	if (last_y + display_size[opt] + (dilation_factor-1)*(display_size[opt]-1) > demo_display[opt][0].length) {
 		last_y = 0;
 		last_x ++;
 	}	

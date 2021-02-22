@@ -32,27 +32,16 @@ function selectTab(evt, opt) {
 
   kernal_size = 3;
   window.clearInterval(timer);
-  render_convolution(opt);
 
+  if (opt == 'symmetric') {
+    intialize_symmetric_setting(symmetric_val);
+  }
+  render_convolution(opt);
 }
 
 function click_symmetric(evt, val) {
-  switch (val) {
-    case 1:
-      kernal_size = 3;
-      display_size['symmetric'] = 3;
-      pad_size['symmetric'] = 1;
-      break;
-    case 2:
-      kernal_size = 5;
-      display_size['symmetric'] = 5;
-      pad_size['symmetric'] = 2;
-      break;
-    case 3:
-      kernal_size = 3;
-      display_size['symmetric'] = 3;
-      pad_size['symmetric'] = 2;
-  }
+  symmetric_val = val;
+  intialize_symmetric_setting(val);
 
   // Get all elements with class="tablinks" and remove the class "active"
   let opts = document.getElementsByClassName("opts");
@@ -65,6 +54,28 @@ function click_symmetric(evt, val) {
 
   window.clearInterval(timer);
   render_convolution('symmetric');
+}
+
+function intialize_symmetric_setting(val) {
+  switch (val) {
+    case 1:
+      kernal_size = 3;
+      display_size['symmetric'] = 3;
+      pad_size['symmetric'] = 1;
+      dilation_factor = 1;
+      break;
+    case 2:
+      kernal_size = 5;
+      display_size['symmetric'] = 5;
+      pad_size['symmetric'] = 2;
+      dilation_factor = 1;
+      break;
+    case 3:
+      kernal_size = 3;
+      display_size['symmetric'] = 3;
+      pad_size['symmetric'] = 2;
+      dilation_factor = 2;
+  }
 }
 
 function click_play(evt, opt) {
