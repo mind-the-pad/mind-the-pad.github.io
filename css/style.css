@@ -92,6 +92,10 @@ input {
   border-top: none;
 }
 
+.tabcontent p {
+  margin-bottom: 2px;
+}
+
 .demo_div {
   display: flex;
   flex-direction: row;

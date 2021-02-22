@@ -146,7 +146,7 @@ function initialize_static_table(opt,) {
 						.style('background-color', 'white');
 					d3.select(`#${opt}-totops-${select_pixel[opt][1]}-${select_pixel[opt][2]}`)
 						// .style('background-color', 'white');
-						.style('background-color', baseColors(colorScale[opt](tot_conv_involved[opt][ii][jj])))
+						.style('background-color', baseColors(colorScale[opt](tot_conv_involved[opt][select_pixel[opt][1]][select_pixel[opt][2]])))
 					d3.select(`#${opt}-demo-${select_pixel[opt][1]+pad_size[opt]}-${select_pixel[opt][2]+pad_size[opt]}`)
 						.style('font-weight', 'normal')
 				}
@@ -377,22 +377,40 @@ function update_demo(opt) {
 }
 
 function update_demo_partial(opt) {
-	count = 0;
+	let count = 0;
+	let used_x = [], used_y = [];
 	for (let x = last_x; x < last_x+display_size[opt]; x++) {
 		for (let y = last_y; y < last_y+display_size[opt]; y++) {
-			if (d3.select(`#${opt}-demo-${x}-${y}`).html() !== '') {
-				d3.select(`#${opt}-demo-${x}-${y}`)
-					.style('background-color', highlight_background);
+			if (d3.select(`#${opt}-demo-${x}-${y}`).html() !== ' ') {
+				if (d3.select(`#${opt}-demo-${x}-${y}`).html() == select_val) {
+					used_x.push(x-last_x);
+					used_y.push(y-last_y);
+					d3.select(`#${opt}-demo-${x}-${y}`)
+						.style('background-color', highlight_background);
+				} else {
+					d3.select(`#${opt}-demo-${x}-${y}`)
+						.style('background-color', light_highlight_background);
+				}
 				count++;
 			} else {
 				d3.select(`#${opt}-demo-${x}-${y}`)
 					.style('background-color', demo_background);
 			}
+			
 		}
 	}
 
 	d3.select(`#${opt}_turn`)
 		.html(`9/${count} = ${(9/count).toFixed(2)}`);
+
+	// rendering used cells
+	d3.selectAll(`#${opt}_used td`)
+		.style('background-color', 'white');
+	for (let i = 0; i < used_x.length; i++) {
+		d3.select(`#${opt}-used-${used_x[i]}-${used_y[i]}`)
+			.style('background-color', highlight_background)
+	}
+
 	rendered_conv += 9/count;
 
 	if (Math.abs(rendered_conv - tot_conv_involved[opt][select_x][select_y]) < 1e-7) {
@@ -400,7 +418,7 @@ function update_demo_partial(opt) {
 		calculated = true;
 	}
 	last_y++;
-	if (last_y + display_size[opt] + (dilation_factor-1)*(display_size[opt]-1) > demo_display[opt][0].length) {
+	if (last_y + display_size[opt]  > demo_display[opt][0].length) {
 		last_y = 0;
 		last_x ++;
 	}

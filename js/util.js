@@ -224,9 +224,9 @@ function find_the_next_conv_for_count(opt, last_x, last_y, select_val, sum_arr) 
 				if (opt === 'partial_conv' && d3.select(`#${opt}-demo-${x}-${y}`).html() !== ' ') {
 					count++;
 				}
-				if (opt !== 'partial_conv' && d3.select(`#${opt}-demo-${x}-${y}`).html() == select_val) {
+				if (d3.select(`#${opt}-demo-${x}-${y}`).html() == select_val) {
 					contain = true;
-					pos_x = x-last_x, pos_y = y-last_y;
+					pos_x = i, pos_y = j;
 					if (opt !== 'partial_conv') {
 						val++;
 						if (sum_arr !== undefined) {
