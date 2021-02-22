@@ -39,42 +39,37 @@
           <p>[placeholder] All illustrations use a stride of 1. Except for <i>VALID</i>, all configurations warrant SAME padding.</p>
 
           <div class="tab">
-            <button class="tablinks active" onclick="selectTab(event, 'valid')">
-              <img src="/image/valid.png">
-              <span>VALID</span>
-            </button>
-            <button class="tablinks" onclick="selectTab(event, 'zero')">
-              <img src="/image/zero.png">
-              <span>Zero</span>
-            </button>
-            <button class="tablinks" onclick="selectTab(event, 'circular')">
-              <img src="/image/circular.png">
-              <span>Circular</span>
-            </button>
-            <button class="tablinks" onclick="selectTab(event, 'symmetric')">
-              <img src="/image/symmetric.png">
-              <span>Mirror (SYMMETRIC)</span>
-            </button>
-         <!--    <button class="tablinks" onclick="selectTab(event, 'symmetric2')">
-              <img src="/image/symmetric.png">
-              <span>SYMMETRIC 2</span>
-            </button>
-            <button class="tablinks" onclick="selectTab(event, 'symmetric3')">
-              <img src="/image/symmetric.png">
-              <span>SYMMETRIC 3</span>
-            </button> -->
-            <button class="tablinks" onclick="selectTab(event, 'reflect')">
-              <img src="/image/reflect.png">
-              <span>Mirror (REFLECT)</span>
-            </button>
-            <button class="tablinks" onclick="selectTab(event, 'replicate')">
-              <img src="/image/replicate.png">
-              <span>Replication</span>
-            </button>
-            <button class="tablinks" onclick="selectTab(event, 'partial_conv')">
-              <img src="/image/partial_conv.png">
-              <span>Partial Convolution</span>
-            </button>
+            <div>
+              <button class="tablinks active" onclick="selectTab(event, 'valid')">
+                <img src="/image/valid.png">
+                <span>VALID</span>
+              </button>
+              <button class="tablinks" onclick="selectTab(event, 'zero')">
+                <img src="/image/zero.png">
+                <span>Zero</span>
+              </button>
+              <button class="tablinks" onclick="selectTab(event, 'circular')">
+                <img src="/image/circular.png">
+                <span>Circular</span>
+              </button>
+              <button class="tablinks" onclick="selectTab(event, 'symmetric')">
+                <img src="/image/symmetric.png">
+                <span>Mirror (SYMMETRIC)</span>
+              </button>
+              <button class="tablinks" onclick="selectTab(event, 'reflect')">
+                <img src="/image/reflect.png">
+                <span>Mirror (REFLECT)</span>
+              </button>
+              <button class="tablinks" onclick="selectTab(event, 'replicate')">
+                <img src="/image/replicate.png">
+                <span>Replication</span>
+              </button>
+              <button class="tablinks" onclick="selectTab(event, 'partial_conv')">
+                <img src="/image/partial_conv.png">
+                <span>Partial Convolution</span>
+              </button>
+            </div>
+            
           </div>
 
           <div id="valid" class="tabcontent" style="display: block;">
@@ -100,14 +95,6 @@
                   <p><b>#conv_ops each pixel is involved in:</b></p>
                   <table id="valid_totops"><tbody></tbody></table>
                 </div>
-
-                 <div id="valid_overview" class="center_div">
-                  <p>
-                    <b>Overview of used cells:</b>
-                  </p>
-                  <table id="valid_used" class="summary_div"><tbody></tbody></table>
-                  <p>sum = <span id='valid_used_sum'></span></p>
-                </div>
               </div>
             </div>
 
@@ -129,6 +116,15 @@
                     <input class="play" type="image" onclick="click_pause(event, 'valid')" src="icon/pause.png"/>
                     <input class="play" type="image" onclick="click_next(event, 'valid')" src="icon/next.png"/>
                   </div>
+
+                  <div id="valid_overview" class="center_div">
+                    <p>
+                      <b>Overview of used cells:</b>
+                    </p>
+                    <table id="valid_used" class="summary_div"><tbody></tbody></table>
+                    <p>sum = <span id='valid_used_sum'></span></p>
+                  </div>
+
                 </div>
               </div>
             </div>
@@ -160,14 +156,6 @@
                   <p><b>#conv_ops each pixel is involved in:</b></p>
                   <table id="zero_totops"><tbody></tbody></table>
                 </div>
-
-                <div id="zero_overview" class="center_div">
-                  <p>
-                    <b>Overview of used cells:</b><br>
-                  </p>
-                  <table id="zero_used" class="summary_div"><tbody></tbody></table>
-                  <p>sum = <span id='zero_used_sum'></span></p>
-                </div>
               </div>
             </div>
 
@@ -179,8 +167,25 @@
               <div style='display: flex; flex-direction: row;'>
                 <table id="zero_demo" class="summary_div"><tbody></tbody></table>
 
-                <p> select pixel <span id="zero_select"> ___ </span>.  <br>
-                Display the no.<span id="zero_turn"> ___ </span> convolution involved.</p>
+                <div style="display: flex; flex-direction: column;">
+                  <p> select pixel <span id="zero_select"> ___ </span>.  <br>
+                  Display the no.<span id="zero_turn"> ___ </span> convolution involved.</p>
+
+                  <div style='display: flex; flex-direction: row; justify-content: space-around;'>
+                    <input class="play" type="image" onclick="click_play(event, 'zero')" src="icon/play.png"/>
+                    <input class="play" type="image" onclick="click_pause(event, 'zero')" src="icon/pause.png"/>
+                    <input class="play" type="image" onclick="click_next(event, 'zero')" src="icon/next.png"/>
+                  </div>
+
+                  <div id="zero_overview" class="center_div">
+                    <p>
+                      <b>Overview of used cells:</b><br>
+                    </p>
+                    <table id="zero_used" class="summary_div"><tbody></tbody></table>
+                    <p>sum = <span id='zero_used_sum'></span></p>
+                  </div>
+                </div>
+                
               </div>
             </div>
           </div>
@@ -209,14 +214,6 @@
                   <p><b>Number of conv ops each pixel is involved in:</b></p>
                   <table id="circular_totops"><tbody></tbody></table>
                 </div>
-
-                <div id="circular_overview" class="center_div">
-                  <p>
-                    <b>Overview of used cells:</b><br>
-                  </p>
-                  <table id="circular_used" class="summary_div"><tbody></tbody></table>
-                  <p>sum = <span id='circular_used_sum'></span></p>
-                </div>
               </div>
             </div>
 
@@ -227,9 +224,25 @@
 
               <div style='display: flex; flex-direction: row;'>
                 <table id="circular_demo" class="summary_div"><tbody></tbody></table>
+                <div style="display: flex; flex-direction: column;">
+                  <p> select pixel <span id="circular_select"> ___ </span>.  <br>
+                  Display the no.<span id="circular_turn"> ___ </span> convolution involved.</p>
 
-                <p> select pixel <span id="circular_select"> ___ </span>.  <br>
-                Display the no.<span id="circular_turn"> ___ </span> convolution involved.</p>
+                  <div style='display: flex; flex-direction: row; justify-content: space-around;'>
+                    <input class="play" type="image" onclick="click_play(event, 'circular')" src="icon/play.png"/>
+                    <input class="play" type="image" onclick="click_pause(event, 'circular')" src="icon/pause.png"/>
+                    <input class="play" type="image" onclick="click_next(event, 'circular')" src="icon/next.png"/>
+                  </div>
+
+                  <div id="circular_overview" class="center_div">
+                    <p>
+                      <b>Overview of used cells:</b><br>
+                    </p>
+                    <table id="circular_used" class="summary_div"><tbody></tbody></table>
+                    <p>sum = <span id='circular_used_sum'></span></p>
+                  </div>
+
+                </div>
               </div>
             </div>
           </div>
@@ -267,14 +280,6 @@
                 <p><b>Number of conv ops each pixel is involved in:</b></p>
                 <table id="symmetric_totops"><tbody></tbody></table>
               </div>
-
-              <div id="symmetric_overview" class="center_div">
-                <p>
-                  <b>Overview of used cells:</b><br>
-                </p>
-                <table id="symmetric_used" class="summary_div"><tbody></tbody></table>
-                <p>sum = <span id='zero_used_sum'></span></p>
-              </div>
             </div>
 
             <div>
@@ -284,9 +289,26 @@
 
               <div style='display: flex; flex-direction: row;'>
                 <table id="symmetric_demo" class="summary_div"><tbody></tbody></table>
+                
+                <div style="display: flex; flex-direction: column;">
+                  <p> select pixel <span id="symmetric_select"> ___ </span>.  <br>
+                  Display the no.<span id="symmetric_turn"> ___ </span> convolution involved.</p>
 
-                <p> select pixel <span id="symmetric_select"> ___ </span>.  <br>
-                Display the no.<span id="symmetric_turn"> ___ </span> convolution involved.</p>
+                  <div style='display: flex; flex-direction: row; justify-content: space-around;'>
+                    <input class="play" type="image" onclick="click_play(event, 'symmetric')" src="icon/play.png"/>
+                    <input class="play" type="image" onclick="click_pause(event, 'symmetric')" src="icon/pause.png"/>
+                    <input class="play" type="image" onclick="click_next(event, 'symmetric')" src="icon/next.png"/>
+                  </div>
+
+                  <div id="symmetric_overview" class="center_div">
+                    <p>
+                      <b>Overview of used cells:</b><br>
+                    </p>
+                    <table id="symmetric_used" class="summary_div"><tbody></tbody></table>
+                    <p>sum = <span id='symmetric_used_sum'></span></p>
+                  </div>
+
+                </div>
               </div>
             </div>
           </div>
@@ -311,17 +333,9 @@
                 </table>
               </div>
 
-              <div class="summary_div">
+               <div class="summary_div">
                 <p><b>Number of conv ops each pixel is involved in:</b></p>
                 <table id="reflect_totops"><tbody></tbody></table>
-              </div>
-
-              <div id="reflect_overview" class="center_div">
-                <p>
-                  <b>Overview of used cells:</b><br>
-                </p>
-                <table id="reflect_used" class="summary_div"><tbody></tbody></table>
-                <p>sum = <span id='reflect_used_sum'></span></p>
               </div>
             </div>
 
@@ -332,9 +346,24 @@
 
               <div style='display: flex; flex-direction: row;'>
                 <table id="reflect_demo" class="summary_div"><tbody></tbody></table>
+                <div style="display: flex; flex-direction: column;">
+                  <p> select pixel <span id="reflect_select"> ___ </span>.  <br>
+                  Display the no.<span id="reflect_turn"> ___ </span> convolution involved.</p>
 
-                <p> select pixel <span id="reflect_select"> ___ </span>.  <br>
-                Display the no.<span id="reflect_turn"> ___ </span> convolution involved.</p>
+                   <div style='display: flex; flex-direction: row; justify-content: space-around;'>
+                    <input class="play" type="image" onclick="click_play(event, 'reflect')" src="icon/play.png"/>
+                    <input class="play" type="image" onclick="click_pause(event, 'reflect')" src="icon/pause.png"/>
+                    <input class="play" type="image" onclick="click_next(event, 'reflect')" src="icon/next.png"/>
+                  </div>
+
+                  <div id="reflect_overview" class="center_div">
+                    <p>
+                      <b>Overview of used cells:</b><br>
+                    </p>
+                    <table id="reflect_used" class="summary_div"><tbody></tbody></table>
+                    <p>sum = <span id='reflect_used_sum'></span></p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -365,13 +394,6 @@
                 <table id="replicate_totops"><tbody></tbody></table>
               </div>
 
-              <div id="replicate_overview" class="center_div">
-                <p>
-                  <b>Overview of used cells:</b><br>
-                </p>
-                <table id="replicate_used" class="summary_div"><tbody></tbody></table>
-                <p>sum = <span id='replicate_used_sum'></span></p>
-              </div>
             </div>
 
             <div>
@@ -381,9 +403,25 @@
 
               <div style='display: flex; flex-direction: row;'>
                 <table id="replicate_demo" class="summary_div"><tbody></tbody></table>
+                
+                <div style="display: flex; flex-direction: column;">
+                  <p> select pixel <span id="replicate_select"> ___ </span>.  <br>
+                  Display the no.<span id="replicate_turn"> ___ </span> convolution involved.</p>
 
-                <p> select pixel <span id="replicate_select"> ___ </span>.  <br>
-                Display the no.<span id="replicate_turn"> ___ </span> convolution involved.</p>
+                  <div style='display: flex; flex-direction: row; justify-content: space-around;'>
+                    <input class="play" type="image" onclick="click_play(event, 'replicate')" src="icon/play.png"/>
+                    <input class="play" type="image" onclick="click_pause(event, 'replicate')" src="icon/pause.png"/>
+                    <input class="play" type="image" onclick="click_next(event, 'replicate')" src="icon/next.png"/>
+                  </div>
+
+                  <div id="replicate_overview" class="center_div">
+                    <p>
+                      <b>Overview of used cells:</b><br>
+                    </p>
+                    <table id="replicate_used" class="summary_div"><tbody></tbody></table>
+                    <p>sum = <span id='replicate_used_sum'></span></p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -413,14 +451,6 @@
                 <p><b>Number of conv ops each pixel is involved in:</b></p>
                 <table id="partial_conv_totops"><tbody></tbody></table>
               </div>
-
-              <div id="partial_conv_overview" class="center_div">
-                <p>
-                  <b>Overview of used cells:</b><br>
-                </p>
-                <table id="partial_conv_used" class="summary_div"><tbody></tbody></table>
-                <p>sum = <span id='partial_conv_used_sum'></span></p>
-              </div>
             </div>
 
             <div>
@@ -430,9 +460,25 @@
 
               <div style='display: flex; flex-direction: row;'>
                 <table id="partial_conv_demo" class="summary_div"><tbody></tbody></table>
+              
+                <div style="display: flex; flex-direction: column;">
+                  <p> select pixel <span id="partial_conv_select"> ___ </span>.  <br>
+                  Highlight the weighted kernel cells: <span id="partial_conv_turn"> ___ </span>.</p>
 
-                <p> select pixel <span id="partial_conv_select"> ___ </span>.  <br>
-                Highlight the weighted kernel cells: <span id="partial_conv_turn"> ___ </span>.</p>
+                  <div style='display: flex; flex-direction: row; justify-content: space-around;'>
+                    <input class="play" type="image" onclick="click_play(event, 'partial_conv')" src="icon/play.png"/>
+                    <input class="play" type="image" onclick="click_pause(event, 'partial_conv')" src="icon/pause.png"/>
+                    <input class="play" type="image" onclick="click_next(event, 'partial_conv')" src="icon/next.png"/>
+                  </div>
+
+                  <div id="partial_conv_overview" class="center_div">
+                    <p>
+                      <b>Overview of used cells:</b><br>
+                    </p>
+                    <table id="partial_conv_used" class="summary_div"><tbody></tbody></table>
+                    <p>sum = <span id='partial_conv_used_sum'></span></p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
