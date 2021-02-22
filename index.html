@@ -113,9 +113,9 @@
                   Display the no.<span id="valid_turn"> ___ </span> convolution involved.</p>
 
                   <div style='display: flex; flex-direction: row; justify-content: space-around;'>
-                    <input class="play" type="image" onclick="click_play(event, 'valid')" src="icon/play.png"/>
-                    <input class="play" type="image" onclick="click_pause(event, 'valid')" src="icon/pause.png"/>
-                    <input class="play" type="image" onclick="click_next(event, 'valid')" src="icon/next.png"/>
+                    <input class="play" id="valid_previous" type="image" onclick="click_previous('valid')" src="icon/previous.png"/>
+                    <input class="play" id="valid_play" type="image"/>
+                    <input class="play" id="valid_next" type="image" onclick="click_next('valid')" src="icon/next.png"/>
                   </div>
 
                   <div id="valid_overview" class="center_div">
@@ -169,9 +169,9 @@
                   Display the no.<span id="zero_turn"> ___ </span> convolution involved.</p>
 
                   <div style='display: flex; flex-direction: row; justify-content: space-around;'>
-                    <input class="play" type="image" onclick="click_play(event, 'zero')" src="icon/play.png"/>
-                    <input class="play" type="image" onclick="click_pause(event, 'zero')" src="icon/pause.png"/>
-                    <input class="play" type="image" onclick="click_next(event, 'zero')" src="icon/next.png"/>
+                    <input class="play" type="image" onclick="click_previous('zero')" src="icon/previous.png"/>
+                    <input class="play" id="zero_play" type="image"/>
+                    <input class="play" type="image" onclick="click_next('zero')" src="icon/next.png"/>
                   </div>
 
                   <div id="zero_overview" class="center_div">
@@ -224,9 +224,9 @@
                   Display the no.<span id="circular_turn"> ___ </span> convolution involved.</p>
 
                   <div style='display: flex; flex-direction: row; justify-content: space-around;'>
-                    <input class="play" type="image" onclick="click_play(event, 'circular')" src="icon/play.png"/>
-                    <input class="play" type="image" onclick="click_pause(event, 'circular')" src="icon/pause.png"/>
-                    <input class="play" type="image" onclick="click_next(event, 'circular')" src="icon/next.png"/>
+                    <input class="play" type="image" onclick="click_previous('circular')" src="icon/previous.png"/>
+                    <input class="play" id="circular_play" type="image"/>
+                    <input class="play" type="image" onclick="click_next('circular')" src="icon/next.png"/>
                   </div>
 
                   <div id="circular_overview" class="center_div">
@@ -288,9 +288,9 @@
                   Display the no.<span id="symmetric_turn"> ___ </span> convolution involved.</p>
 
                   <div style='display: flex; flex-direction: row; justify-content: space-around;'>
-                    <input class="play" type="image" onclick="click_play(event, 'symmetric')" src="icon/play.png"/>
-                    <input class="play" type="image" onclick="click_pause(event, 'symmetric')" src="icon/pause.png"/>
-                    <input class="play" type="image" onclick="click_next(event, 'symmetric')" src="icon/next.png"/>
+                    <input class="play" type="image" onclick="click_previous('symmetric')" src="icon/previous.png"/>
+                    <input class="play" id="symmetric_play" type="image"/>
+                    <input class="play" type="image" onclick="click_next('symmetric')" src="icon/next.png"/>
                   </div>
 
                   <div id="symmetric_overview" class="center_div">
@@ -342,9 +342,9 @@
                   Display the no.<span id="reflect_turn"> ___ </span> convolution involved.</p>
 
                    <div style='display: flex; flex-direction: row; justify-content: space-around;'>
-                    <input class="play" type="image" onclick="click_play(event, 'reflect')" src="icon/play.png"/>
-                    <input class="play" type="image" onclick="click_pause(event, 'reflect')" src="icon/pause.png"/>
-                    <input class="play" type="image" onclick="click_next(event, 'reflect')" src="icon/next.png"/>
+                    <input class="play" type="image" onclick="click_previous('reflect')" src="icon/previous.png"/>
+                    <input class="play" id="reflect_play" type="image"/>
+                    <input class="play" type="image" onclick="click_next('reflect')" src="icon/next.png"/>
                   </div>
 
                   <div id="reflect_overview" class="center_div">
@@ -398,9 +398,9 @@
                   Display the no.<span id="replicate_turn"> ___ </span> convolution involved.</p>
 
                   <div style='display: flex; flex-direction: row; justify-content: space-around;'>
-                    <input class="play" type="image" onclick="click_play(event, 'replicate')" src="icon/play.png"/>
-                    <input class="play" type="image" onclick="click_pause(event, 'replicate')" src="icon/pause.png"/>
-                    <input class="play" type="image" onclick="click_next(event, 'replicate')" src="icon/next.png"/>
+                    <input class="play" type="image" onclick="click_previous('replicate')" src="icon/previous.png"/>
+                    <input class="play" id="replicate_play" type="image"/>
+                    <input class="play" type="image" onclick="click_next('replicate')" src="icon/next.png"/>
                   </div>
 
                   <div id="replicate_overview" class="center_div">
@@ -454,9 +454,9 @@
                   Highlight the weighted kernel cells: <span id="partial_conv_turn"> ___ </span>.</p>
 
                   <div style='display: flex; flex-direction: row; justify-content: space-around;'>
-                    <input class="play" type="image" onclick="click_play(event, 'partial_conv')" src="icon/play.png"/>
-                    <input class="play" type="image" onclick="click_pause(event, 'partial_conv')" src="icon/pause.png"/>
-                    <input class="play" type="image" onclick="click_next(event, 'partial_conv')" src="icon/next.png"/>
+                    <input class="play" type="image" onclick="click_previous('partial_conv')" src="icon/previous.png"/>
+                    <input class="play" id="partial_conv_play" type="image"/>
+                    <input class="play" type="image" onclick="click_next('partial_conv')" src="icon/next.png"/>
                   </div>
 
                   <div id="partial_conv_overview" class="center_div">

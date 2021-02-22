@@ -72,7 +72,7 @@ demo_display = {
  symmetric_val = 0,
  dilation_factor = 1;
 
- let rendered = {}, calculated = true, used_x, used_y, x_plus;
+ let rendered = {}, calculated = true, used_x, used_y;
 
  let select_pixel = {}, timer;
  let kernal_size = 3, rendered_conv = 0, st_x, st_y, select_x, select_y, select_val;
@@ -84,6 +84,13 @@ demo_display = {
  	// d3.selectAll(`#${opt}_input tbody *`).remove();
  	// d3.selectAll(`#${opt}_totops tbody *`).remove();
  	// d3.selectAll(`#${opt}_demo tbody *`).remove();
+
+ 	// set pause clickable
+ 	d3.select(`#${opt}_play`)
+ 		.attr("src", "icon/pause.png")
+ 		.on("click", d => click_pause('valid'));
+
+  	paused = false;
 
  	// initialize
  	if (rendered[opt] == undefined & opt != 'symmetric') {
@@ -110,6 +117,10 @@ function initialize_static_table(opt,) {
 	input_node.select('p').append('img')
 		.attr('src', "/icon/pointer.png")
 		.attr('class', 'pointer_img')
+
+	input_node.select('p').append('span')
+		.text('Click a pixel below')
+	 	.attr('class', 'pointer')
 
 	input_node.append('table')
 		.attr('id', `${opt}_input`)
@@ -151,6 +162,12 @@ function initialize_static_table(opt,) {
 						.style('font-weight', 'normal')
 				}
 
+				// set pause clickable
+			 	d3.select(`#${opt}_play`)
+			 		.attr("src", "icon/pause.png")
+			 		.on("click", d => click_pause('valid'))
+  				paused = false;
+
 				// highlight
 				this.style.backgroundColor = highlight_background;
 				d3.select(`#${opt}-totops-${ii}-${jj}`)
@@ -165,7 +182,6 @@ function initialize_static_table(opt,) {
 				// update summary overview
 				update_used_table(opt, ii, jj);
 				calculated = true;
-				x_plus = false;
 
 				// render animation 
 				rendered_conv = 0;
@@ -286,7 +302,20 @@ function update_used_table(opt, ii, jj) {
 
 function find_the_next_conv(opt) {
 	let contain = false;
-	if (rendered_conv == 0) {
+
+	last_y++;
+	if (last_y + display_size[opt] + (dilation_factor-1)*(display_size[opt]-1) > demo_display[opt][0].length) {
+		last_y = 0;
+		last_x ++;
+	}	
+
+	if (opt == 'partial_conv') {
+		if (Math.abs(rendered_conv - tot_conv_involved[opt][select_x][select_y]) < 1e-7) {
+			rendered_conv = 0;
+		}
+	}
+
+	if (rendered_conv == tot_conv_involved[opt][select_x][select_y] || rendered_conv == 0) {
 		last_y = 0, last_x = 0;
 	}
 	while (last_x < demo_display[opt].length && last_y < demo_display[opt][0].length) {
@@ -307,20 +336,68 @@ function find_the_next_conv(opt) {
 		if (last_y + display_size[opt] + (dilation_factor-1)*(display_size[opt]-1) > demo_display[opt][0].length) {
 			last_y = 0;
 			last_x ++;
-			x_plus = true;
 		}
 	}
 }
 
-function update_demo(opt) {
+function find_the_previous_conv(opt) {
+	let contain = false;
+	last_y--;
+
+	if (last_y < 0) {
+		last_y = demo_display[opt][0].length - display_size[opt] - (dilation_factor-1)*(display_size[opt]-1);
+		last_x --;
+	}
+	if (last_x < 0) {
+		last_x = demo_display[opt].length - display_size[opt] - (dilation_factor-1)*(display_size[opt]-1);
+	}
+
+	if (rendered_conv == 1) {
+		last_y = demo_display[opt][0].length - display_size[opt] - (dilation_factor-1)*(display_size[opt]-1);
+		last_x = demo_display[opt].length - display_size[opt] - (dilation_factor-1)*(display_size[opt]-1);
+	}
+	while (last_x >= 0 && last_y >= 0) {
+		for (let i = 0; i < display_size[opt]; i++) {
+			for (let j = 0; j < display_size[opt]; j++) {
+				let x = last_x + i + (dilation_factor-1)*i,
+					y = last_y + j + (dilation_factor-1)*j;
+				if (d3.select(`#${opt}-demo-${x}-${y}`).html() == select_val) {
+					contain = true;
+					break;
+				}
+			}
+			if (contain) break;
+		}
+		if (contain) break;
+
+		last_y--;
+		if (last_y < 0) {
+			last_y = demo_display[opt][0].length - display_size[opt] - (dilation_factor-1)*(display_size[opt]-1);
+			last_x --;
+		}
+		if (last_x < 0) {
+			last_x = demo_display[opt].length - display_size[opt] - (dilation_factor-1)*(display_size[opt]-1);
+		}
+	}
+}
+
+function update_demo(opt, previous) {
 	// find the next involved conv
-	find_the_next_conv(opt);
+	if (previous !== undefined) {
+		find_the_previous_conv(opt);
+	} else {
+		find_the_next_conv(opt);
+	}
+
+	if (previous===undefined && rendered_conv == tot_conv_involved[opt][select_x][select_y]) {
+		rendered_conv = 0;
+	}
 	
 	d3.selectAll(`#${opt}_demo td`)
 		.style('background-color', 'white');
 
 	if (opt == 'partial_conv') {
-		update_demo_partial(opt);
+		update_demo_partial(opt, previous);
 		return;
 	}
 
@@ -343,11 +420,18 @@ function update_demo(opt) {
 		}
 	}
 
-	rendered_conv++;
-	d3.select(`#${opt}_turn`)
-		.html(count > 1 ? `${rendered_conv} to ${rendered_conv+count-1}` : rendered_conv);
-	rendered_conv += count - 1;
-
+	if (previous !== undefined) {
+		rendered_conv--;
+		if (rendered_conv == 0) rendered_conv = tot_conv_involved[opt][select_x][select_y];
+		d3.select(`#${opt}_turn`)
+			.html(count > 1 ? `${rendered_conv-count} to ${rendered_conv}` : rendered_conv);
+	} else {
+		rendered_conv++;
+		d3.select(`#${opt}_turn`)
+			.html(count > 1 ? `${rendered_conv} to ${rendered_conv+count-1}` : rendered_conv);
+		rendered_conv += count - 1;
+	}
+	
 	// rendering used cells
 	d3.selectAll(`#${opt}_used td`)
 		.style('background-color', demo_background);
@@ -355,28 +439,9 @@ function update_demo(opt) {
 		d3.select(`#${opt}-used-${used_x[i]}-${used_y[i]}`)
 			.style('background-color', highlight_background)
 	}
-	
-
-	x_plus = false;
-	last_y++;
-	if (last_y + display_size[opt] + (dilation_factor-1)*(display_size[opt]-1) > demo_display[opt][0].length) {
-		last_y = 0;
-		last_x ++;
-		x_plus = true;
-	}	
-
-	if (rendered_conv == tot_conv_involved[opt][select_x][select_y]) {
-		if (!calculated) {
-			d3.select(`#${opt}_used_sum`)
-				.html(rendered_conv);
-		}
-		calculated = true;
-		rendered_conv = 0;
-		x_plus = false;
-	}
 }
 
-function update_demo_partial(opt) {
+function update_demo_partial(opt, previous) {
 	let count = 0;
 	let used_x = [], used_y = [];
 	for (let x = last_x; x < last_x+display_size[opt]; x++) {
@@ -411,16 +476,10 @@ function update_demo_partial(opt) {
 			.style('background-color', highlight_background)
 	}
 
-	rendered_conv += 9/count;
-
-	if (Math.abs(rendered_conv - tot_conv_involved[opt][select_x][select_y]) < 1e-7) {
-		rendered_conv = 0;
-		calculated = true;
-	}
-	last_y++;
-	if (last_y + display_size[opt]  > demo_display[opt][0].length) {
-		last_y = 0;
-		last_x ++;
+	if (previous) {
+		rendered_conv -= 9/count;
+	} else {
+		rendered_conv += 9/count;
 	}
 }
 

@@ -44,8 +44,12 @@
   padding-left: 10px;
   width: 16px;
   height: 16px;
-  animation: shake .5s;
-  animation-iteration-count: infinite;
+  /*animation: shake .5s;*/
+  /*animation-iteration-count: infinite;*/
+}
+
+.pointer {
+  padding-left: 5px;
 }
 
 @keyframes shake {
@@ -142,4 +146,8 @@ td{
   float: left;
   padding:0 20px;
   margin: 10px 0;
+}
+
+.disable_button {
+  display: none;
 }

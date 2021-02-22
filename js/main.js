@@ -79,19 +79,32 @@ function intialize_symmetric_setting(val) {
   }
 }
 
-function click_play(evt, opt) {
+function click_play(opt) {
   window.clearInterval(timer);
+  d3.select(`#${opt}_play`)
+    .attr("src", "icon/pause.png")
+    .on("click", d => click_pause('valid'))
   timer = window.setInterval(() => update_demo(opt), 500); 
+  paused = false;
 }
 
-function click_pause(evt, opt) {
+function click_pause(opt) {
   window.clearInterval(timer);
+  d3.select(`#${opt}_play`)
+    .attr("src", "icon/play.png")
+    .on("click", d => click_play('valid'))
   paused = true;
 }
 
-function click_next(evt, opt) {
+function click_next(opt) {
   if (paused) {
     update_demo(opt);
+  }
+}
+
+function click_previous(opt) {
+  if (paused) {
+    update_demo(opt, true)
   }
 }
 
