@@ -104,6 +104,7 @@ demo_display = {
  		d3.selectAll('#symmetric_totops tr').remove();
  		d3.selectAll('#symmetric_used tr').remove();
  		d3.select('#symmetric .summary_div img').remove();
+ 		d3.select('#symmetric .summary_div span').remove();
  		// render
  		initialize_static_table(opt);
  	}
@@ -114,11 +115,11 @@ function initialize_static_table(opt,) {
 	// render interaction hint
 	let input_node = d3.select(`#${opt} .summary_div`)
 
-	input_node.select('p').append('img')
+	input_node.append('img')
 		.attr('src', "/icon/pointer.png")
 		.attr('class', 'pointer_img')
 
-	input_node.select('p').append('span')
+	input_node.append('span')
 		.text('Click a pixel below')
 	 	.attr('class', 'pointer')
 
