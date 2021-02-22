@@ -350,7 +350,7 @@ function update_demo(opt) {
 
 	// rendering used cells
 	d3.selectAll(`#${opt}_used td`)
-		.style('background-color', 'white');
+		.style('background-color', demo_background);
 	for (let i = 0; i < used_x.length; i++) {
 		d3.select(`#${opt}-used-${used_x[i]}-${used_y[i]}`)
 			.style('background-color', highlight_background)
@@ -405,7 +405,7 @@ function update_demo_partial(opt) {
 
 	// rendering used cells
 	d3.selectAll(`#${opt}_used td`)
-		.style('background-color', 'white');
+		.style('background-color', demo_background);
 	for (let i = 0; i < used_x.length; i++) {
 		d3.select(`#${opt}-used-${used_x[i]}-${used_y[i]}`)
 			.style('background-color', highlight_background)

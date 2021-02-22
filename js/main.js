@@ -31,6 +31,7 @@ function selectTab(evt, opt) {
   evt.currentTarget.className += " active";
 
   kernal_size = 3;
+  dilation_factor = 1;
   window.clearInterval(timer);
 
   if (opt == 'symmetric') {
