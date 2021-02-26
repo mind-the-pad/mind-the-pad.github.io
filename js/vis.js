@@ -80,10 +80,14 @@ demo_display = {
  let last_x, last_y;
 
  function render_convolution(opt) {
- 	// clear
- 	// d3.selectAll(`#${opt}_input tbody *`).remove();
- 	// d3.selectAll(`#${opt}_totops tbody *`).remove();
- 	// d3.selectAll(`#${opt}_demo tbody *`).remove();
+ 	// clear pixel selection
+ 	d3.selectAll(`#${opt}_input tbody *`).remove();
+ 	d3.selectAll(`#${opt}_totops tbody *`).remove();
+ 	d3.selectAll(`#${opt}_demo tbody *`).remove();
+ 	d3.selectAll(`#${opt}_used tbody *`).remove();
+ 	d3.select(`#${opt}_select`).html('___');
+ 	d3.select(`#${opt}_turn`).html('___');
+
 
  	// set pause clickable
  	d3.select(`#${opt}_play`)
@@ -93,10 +97,10 @@ demo_display = {
   	paused = false;
 
  	// initialize
- 	if (rendered[opt] == undefined & opt != 'symmetric') {
+ 	if ( opt != 'symmetric') {
  		rendered[opt] = true;
  		initialize_static_table(opt);
- 	} else if (opt === 'symmetric'){
+ 	} else {
  		rendered[opt] = true;
  		// clear
  		d3.selectAll('#symmetric_input').remove();
@@ -452,15 +456,15 @@ function update_demo_partial(opt, previous) {
 					used_x.push(x-last_x);
 					used_y.push(y-last_y);
 					d3.select(`#${opt}-demo-${x}-${y}`)
-						.style('background-color', highlight_background);
+						.style('background-color', highlight_background)
 				} else {
 					d3.select(`#${opt}-demo-${x}-${y}`)
-						.style('background-color', light_highlight_background);
+						.style('background-color', demo_background);
 				}
 				count++;
 			} else {
 				d3.select(`#${opt}-demo-${x}-${y}`)
-					.style('background-color', demo_background);
+					.style('background-color', outside_highlight_background)
 			}
 			
 		}

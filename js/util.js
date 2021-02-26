@@ -249,7 +249,7 @@ function find_the_next_conv_for_count(opt, last_x, last_y, select_val, sum_arr) 
 				val += 9/count;
 				contain = false;
 				if (sum_arr !== undefined) {
-					sum_arr[pos_x][pos_y] = 9/count; 
+					sum_arr[pos_x][pos_y] = `9/${count}`; 
 				}
 			}
 			count = 0;
