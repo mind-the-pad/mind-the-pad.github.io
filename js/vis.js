@@ -121,6 +121,16 @@ demo_display = {
 
 
 function initialize_static_table(opt,) {
+	// add tooltip for play/pause/previous/next
+	d3.select(`#${opt}_previous`)
+		.attr('title', 'check the previous convlution');
+
+	d3.select(`#${opt}_play`)
+		.attr('title', 'play/pause animation');
+
+	d3.select(`#${opt}_next`)
+		.attr('title', 'check the next convlution');
+
 	// render interaction hint
 	let input_node = d3.select(`#${opt} .summary_div`)
 
