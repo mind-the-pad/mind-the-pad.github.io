@@ -62,7 +62,7 @@ function add_zero_padding() {
     	arr[i] = input_display['basic'][i].slice();
 
 	// make the top padding
-	arr.unshift(['0', '0', '0', '0', '0', '0', '0']);
+	arr.unshift(['0', '0', '0', '0', '0', '0', '0', '0', '0']);
 
 	// make the left padding
 	for (let i = 0; i < arr.length; i++) {
@@ -92,8 +92,8 @@ function add_symmetric_padding(kernal_size, padding_size) {
     	arr.unshift(arr[2].slice());
 
 		// add the bottom content
-		arr.push(['...', '...', '...', '...', '...', '...', '...',]);
-		arr.push(['...', '...', '...', '...', '...', '...', '...',]);
+		arr.push(['...', '...', '...', '...', '...', '...', '...', '...', '...',]);
+		arr.push(['...', '...', '...', '...', '...', '...', '...', '...', '...',]);
 
     	// add the left padding
     	for (let i = 0; i < arr.length; i++) {
@@ -137,8 +137,8 @@ function add_replicate_padding() {
 	arr.unshift(arr[1].slice());
 
 	// add the bottom content
-	arr.push(['...', '...', '...', '...', '...', '...', '...',]);
-	arr.push(['...', '...', '...', '...', '...', '...', '...',]);
+	arr.push(['...', '...', '...', '...', '...', '...', '...','...', '...',]);
+	arr.push(['...', '...', '...', '...', '...', '...', '...','...', '...',]);
 
 	// add the left padding
 	for (let i = 0; i < arr.length; i++) {
@@ -162,7 +162,7 @@ function add_partial_conv_padding() {
     	arr[i] = input_display['basic'][i].slice();
 
     // add the top padding
-	arr.unshift([" ", " ", " ", " ", " ", " ", " "]);
+	arr.unshift([" ", " ", " ", " ", " ", " ", " ", " ", " "]);
 
 	// add the left padding
 	for (let i = 0; i < arr.length; i++) {
@@ -179,11 +179,21 @@ function calculate_tot_conv(opt) {
 
 	// calculate
 	let sum_arr = [];
-	for (let i = 0;  i < 5; i++) {
+	for (let i = 0;  i < 7; i++) {
 		let temp = [];
-		for (let j = 0; j < 5; j++) {
+		for (let j = 0; j < 7; j++) {
 			let x =0, y = 0, val=0, sum=0;
-			let pixel = d3.select(`#${opt}-input-${i}-${j}`).html();
+			let pixel = input_display[opt];
+
+			// if (pixel == '...'){
+			// 	pixel = 'xxx';
+			// 	demo_display[opt][i+pad_size[opt]+dilation_factor-1][j+pad_size[opt]+dilation_factor-1] = 'xxx'
+			// }
+			if (opt == 'circular') {
+				pixel = input_display[opt][i][j]
+			} else {
+				pixel = input_display['basic'][i][j];
+			}
 
 			[x, y, val] = find_the_next_conv_for_count(opt, 0, 0, pixel);
 			while (val >= 0) {
@@ -191,6 +201,9 @@ function calculate_tot_conv(opt) {
 				[x, y, val] = find_the_next_conv_for_count(opt, x, y, pixel);
 			}
 			temp.push(sum);
+			// if (pixel == 'xxx'){
+			// 	demo_display[opt][i+pad_size[opt]+dilation_factor-1][j+pad_size[opt]+dilation_factor-1] = '...';
+			// }
 		}
 		sum_arr.push(temp);
 	}
@@ -221,10 +234,10 @@ function find_the_next_conv_for_count(opt, last_x, last_y, select_val, sum_arr) 
 			for (let j = 0; j < display_size[opt]; j++) {
 				let x = last_x + i + (dilation_factor-1)*i,
 					y = last_y + j + (dilation_factor-1)*j;
-				if (opt === 'partial_conv' && d3.select(`#${opt}-demo-${x}-${y}`).html() !== ' ') {
+				if (opt === 'partial_conv' && demo_display[opt][x][y] !== ' ') {
 					count++;
 				}
-				if (d3.select(`#${opt}-demo-${x}-${y}`).html() == select_val) {
+				if (demo_display[opt][x][y] == select_val) {
 					contain = true;
 					pos_x = i, pos_y = j;
 					if (opt !== 'partial_conv') {

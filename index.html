@@ -76,7 +76,7 @@
           </div>
 
           <div id="valid" class="tabcontent" style="display: block;">
-            <h4>VALID Padding (3x3 kernal)</h4>
+            <h4>VALID Padding</h4>
 
             <div style='display: flex; flex-direction: column;'>
               <p>
@@ -133,7 +133,7 @@
           </div>
 
           <div id="zero" class="tabcontent">
-            <h4>Zero Padding (3x3 kernal)</h4>
+            <h4>Zero Padding</h4>
             <div style='display: flex; flex-direction: column;'>
 
               <p>
@@ -188,7 +188,7 @@
           </div>
 
           <div id="circular" class="tabcontent">
-            <h4>Circular Padding (3x3 kernal)</h4>
+            <h4>Circular Padding</h4>
             <div style='display: flex; flex-direction: column;'>
             
               <p>
@@ -307,7 +307,7 @@
           </div>
 
           <div id="reflect" class="tabcontent">
-            <h4> Mirror Padding (REFLECT) (3x3 kernal)</h4>
+            <h4> Mirror Padding (REFLECT)</h4>
             <p>
               <img src="/image/reflect.png" class="big_icon"> 
               This algorithm is illustrated on a 3 × 3 kernel without dilation. <br><br>
@@ -360,7 +360,7 @@
           </div>
 
           <div id="replicate" class="tabcontent">
-            <h4>Replication Padding (5x5 kernal)</h4>
+            <h4>Replication Padding</h4>
             <p>
               <img src="/image/replicate.png" class="big_icon"> 
               This algorithm is illustrated on a 5 × 5 kernel without dilation. We choose this kernel size since a 3×3 kernel under SAME padding would render the algorithm equivalent to SYMMETRIC mirror padding.
@@ -384,12 +384,11 @@
 
             </div>
 
+            <p>
+              <b>Step-by-step illustration</b><br>
+              Padded Input:
+            </p>
             <div>
-              <p>
-                <b>Step-by-step illustration</b><br>
-                Padded Input:
-              </p>
-
               <div style='display: flex; flex-direction: row;'>
                 <table id="replicate_demo" class="summary_div"><tbody></tbody></table>
                 
@@ -416,7 +415,7 @@
           </div>
 
           <div id="partial_conv" class="tabcontent">
-            <h4>Partial Convolution (3x3 kernal)</h4>
+            <h4>Partial Convolution</h4>
             <p>
               <img src="/image/partial_conv.png" class="big_icon"> 
               This algorithm is illustrated on a 3 × 3 kernel without dilation. Its foveation behavior is analogous to REFLECT mirror padding.

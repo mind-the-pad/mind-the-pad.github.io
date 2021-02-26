@@ -1,10 +1,12 @@
  
  let input_display = {
- 	'basic': [['a', 'b', 'c', 'd', 'e', '...', '...', ], 
- 			  ['f', 'g', 'h', 'i', 'j', '...', '...'], 
- 			  ['k', 'l', 'm', 'n', 'o', '...', '...'], 
- 			  ['p', 'q', 'r', 's', 't', '...', '...'], 
- 			  ['u', 'v', 'w', 'x', 'y', '...', '...'], 
+ 	'basic': [['a', 'b', 'c', 'd', 'e', 'ba', 'bb', '...', '...', ], 
+ 			  ['f', 'g', 'h', 'i', 'j', 'bc', 'bd', '...', '...'], 
+ 			  ['k', 'l', 'm', 'n', 'o', 'be', 'bf','...', '...'], 
+ 			  ['p', 'q', 'r', 's', 't', 'bg', 'bh', '...', '...'], 
+ 			  ['u', 'v', 'w', 'x', 'y', 'bi', 'bj','...', '...'], 
+ 			  ['bk', 'bl', 'bm', 'bn', 'bo', 'bp', 'bq','...', '...'], 
+ 			  ['br', 'bs', 'bt', 'bu', 'bv', 'bw', 'bx','...', '...'], 
  			  ['...', '...', '...', '...', '...', '...', '...'], 
  			  ['...', '...', '...', '...', '...', '...', '...']],
  	// 'zero': [['a', 'b', 'c', '...', '...', ], ['d', 'e', 'f', '...', '...'], ['g', 'h', 'i', '...', '...'], ['...', '...', '...', '...', '...'], ['...', '...', '...', '...', '...']],
@@ -94,6 +96,9 @@ demo_display = {
  		.attr("src", "icon/pause.png")
  		.on("click", d => click_pause('valid'));
 
+ 	d3.select(`#${opt}_totops`)
+ 		.style('margin-top', '25px');
+
   	paused = false;
 
  	// initialize
@@ -143,12 +148,20 @@ function initialize_static_table(opt,) {
 		input_display_to_render = input_display['basic'];
 	}
 	input_display_to_render.forEach((row, i) => {
+		if (opt !== 'circular' && i >= input_display_to_render.length-2) return;
+
+		let row_to_render = [];
+		if (opt !== 'circular') {
+			row_to_render = row.slice(0, row.length-2);
+		} else {
+			row_to_render = row;
+		}
 		input_table.append('tr')
 			.selectAll('td')
-			.data(row).enter()
+			.data(row_to_render).enter()
 			.append('td')
 			.attr('id', (d, j) => `${opt}-input-${i}-${j}`)
-			.html(d => d)
+			.html(d => d.length==2 ? '...' : d)
 			.on('click', function(d) {
 				let id = this.id.split('-');
 				let opt = id[0], ii = +id[2], jj = +id[3];
@@ -164,7 +177,7 @@ function initialize_static_table(opt,) {
 						// .style('background-color', 'white');
 						.style('background-color', baseColors(colorScale[opt](tot_conv_involved[opt][select_pixel[opt][1]][select_pixel[opt][2]])))
 					d3.select(`#${opt}-demo-${select_pixel[opt][1]+pad_size[opt]}-${select_pixel[opt][2]+pad_size[opt]}`)
-						.style('font-weight', 'normal')
+						.style('font-weight', 'normal');
 				}
 
 				// set pause clickable
@@ -237,12 +250,19 @@ function initialize_static_table(opt,) {
 	// render demo base
 	let demo_table = d3.select(`#${opt}_demo tbody`);
 	demo_display[opt].forEach((row, i) => {
+		if (opt !== 'circular' && i >= demo_display[opt].length-2) return;
+		let row_to_render = [];
+		if (opt !== 'circular') {
+			row_to_render = row.slice(0, row.length-2);
+		} else {
+			row_to_render = row;
+		}
 		demo_table.append('tr')
 			.selectAll('td')
-			.data(row).enter()
+			.data(row_to_render).enter()
 			.append('td')
 			.attr('id', (d, j) => `${opt}-demo-${i}-${j}`)
-			.html(d => d)
+			.html(d => d.length == 2 ? '...' : d)
 	})
 	render_demo_border(opt, demo_table);
 
@@ -266,7 +286,6 @@ function initialize_static_table(opt,) {
 			.style('background-color', d => baseColors(colorScale[opt](d)))
 	})
 
-	
 
 	// render used base
 	let used_table = d3.select(`#${opt}_used tbody`);
@@ -276,6 +295,7 @@ function initialize_static_table(opt,) {
 			.data(row).enter()
 			.append('td')
 			.attr('id', (d, j) => `${opt}-used-${i}-${j}`)
+			.style('background-color', demo_background)
 			.html(d => d)
 	})
 
@@ -295,7 +315,7 @@ function update_used_table(opt, ii, jj) {
 	used_display_to_render.forEach((row, i) => {
 		row.forEach((val, j) => {
 			d3.select(`#${opt}-used-${i}-${j}`)
-				.style('background-color', 'white')
+				.style('background-color', demo_background)
 				.html(val);
 		});
 	});
@@ -328,7 +348,7 @@ function find_the_next_conv(opt) {
 			for (let j = 0; j < display_size[opt]; j++) {
 				let x = last_x + i + (dilation_factor-1)*i,
 					y = last_y + j + (dilation_factor-1)*j;
-				if (d3.select(`#${opt}-demo-${x}-${y}`).html() == select_val) {
+				if (demo_display[opt][x][y] == select_val) {
 					contain = true;
 					break;
 				}
@@ -366,7 +386,7 @@ function find_the_previous_conv(opt) {
 			for (let j = 0; j < display_size[opt]; j++) {
 				let x = last_x + i + (dilation_factor-1)*i,
 					y = last_y + j + (dilation_factor-1)*j;
-				if (d3.select(`#${opt}-demo-${x}-${y}`).html() == select_val) {
+				if (demo_display[opt][x][y] == select_val) {
 					contain = true;
 					break;
 				}
