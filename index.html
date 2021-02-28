@@ -21,22 +21,22 @@
       <div class="row">
         <div class="twelve columns" style="margin-top: 15%" id='body-container'>
       
-          <h1>Mind The Pad – CNNs Can Develop Blind Spots</h1>
-          <h5>Bilal Alsallakh, Narine Kokhlikyan, Vivek Miglani, Jun Yuan, Orion Reblitz-Richardson</h5>
-          <b>Preprint on arXiv: <a href="https://arxiv.org/pdf/2010.02178.pdf">https://arxiv.org/pdf/2010.02178.pdf</a></b><br>
-          <b>Repository on github: </b><br>
-          <b>Supplemental material (code, data, results): </b><br>
+          <h1>Convolution Can Incur Foveation Effects</h1>
+          <h5>Jun Yuan, Bilal Alsallakh, Narine Kokhlikyan, Vivek Miglani, Orion Rebliz-Richardson</h5>
       
           <br><br>
           <p>
-            [Placeholder] We show how feature maps in convolutional networks are susceptible to spatial bias. Due to a combination of architectural choices, the activation at certain locations is systematically elevated or weakened. The major source of this bias is the padding mechanism. Depending on several aspects of convolution arithmetic, this mechanism can apply the padding unevenly, leading to asymmetries in the learned weights. We demonstrate how such bias can be detrimental to certain tasks such as small object detection: the activation is suppressed if the stimulus lies in the impacted area, leading to blind spots and misdetection. We propose solutions to mitigate spatial bias and demonstrate how they can improve model accuracy.
+           In this web page, we introduce an interactive web-based visualization demonstrating how boundary treatment in convolutional networks can incur foveation effects: Impacted pixels have fewer ways to contribute to the computation than center pixels. This effect is first reported in a recent work to be presented at ICLR 2021.
           </p>
 
           <h3>Padding And Foveation Behavior of CNNs</h3>
 
-          <p>[placeholder] This interactive visual tool demonstrates how different padding strategies work, and how it leads to spatial bias in CNNs.</p>
+          <p>This interactive visual tool demonstrates how different padding strategies work, and how it leads to spatial bias in CNNs.</p>
 
-          <p>[placeholder] All illustrations use a stride of 1. Except for <i>VALID</i>, all configurations warrant SAME padding.</p>
+          <p>
+            Except for <i>VALID</i>, all configurations warrant SAME padding.  
+            Click the pixel represented as a letter in the <b>Input</b> image, a step-by-step illustration of how this padding strategy works will show below.
+          </p>
         </div>
       </div>
     </div>
@@ -78,14 +78,16 @@
           <div id="valid" class="tabcontent" style="display: block;">
             <h4>VALID Padding</h4>
 
-            <div style='display: flex; flex-direction: column;'>
+            <div class='intro_div'>
               <p>
                 <img src="/image/valid.png" class="big_icon">
                 No padding. This strategy assumes that all the dimensions are valid, that is, the input image gets fully covered by a filter and the stride specified. 
                 <br>
                 This algorithm is illustrated on a 3 × 3 kernel without dilation. A larger kernel size or dilation factor will increase the foveation effect.
               </p>
+            </div>
 
+            <div>
               <div style='display: flex; flex-direction: row;'>
                 <div class="summary_div">
                   <p><b>Input (left top corner of an image):</b></p>
@@ -135,13 +137,14 @@
           <div id="zero" class="tabcontent">
             <h4>Zero Padding</h4>
             <div style='display: flex; flex-direction: column;'>
-
-              <p>
-                <img src="/image/zero.png" class="big_icon"> 
-                Zero padding strategy refers to adding a border of pixels all with value zero around the edges of the input images. This strategy allows us to preserve the original input size.
-                <br>
-                This algorithm is illustrated on a 3 × 3 kernel without dilation. A larger kernel size or dilation factor will increase the foveation effect.
-              </p>
+              <div class="intro_div">
+                <p>
+                  <img src="/image/zero.png" class="big_icon"> 
+                  Zero padding strategy refers to adding a border of pixels all with value zero around the edges of the input images. This strategy allows us to preserve the original input size.
+                  <br>
+                  This algorithm is illustrated on a 3 × 3 kernel without dilation. A larger kernel size or dilation factor will increase the foveation effect.
+                </p>
+              </div>
               
               <div style='display: flex; flex-direction: row;'>
                 <div class="summary_div">
@@ -190,14 +193,16 @@
           <div id="circular" class="tabcontent">
             <h4>Circular Padding</h4>
             <div style='display: flex; flex-direction: column;'>
-            
-              <p>
-                <img src="/image/circular.png" class="big_icon"> 
+              
+              <div class="intro_div">
+                <p>
+                  <img src="/image/circular.png" class="big_icon"> 
 
-                This algorithm is illustrated on a 3 × 3 kernel without dilation. It is straightforward to prove that the algorithm warrants equal treatment of the pixels irrespective of the kernel size or dilation factor. 
-                <br> 
-                This is because it effectively applies circular convolution: Once the kernel hits one side, it can seamlessly operate on the pixels of the other side. Circular convolution hence renders the feature map as infinite to the kernel, warranting that edge pixels are treated in the same manner as interior pixels.
-              </p>
+                  This algorithm is illustrated on a 3 × 3 kernel without dilation. It is straightforward to prove that the algorithm warrants equal treatment of the pixels irrespective of the kernel size or dilation factor. 
+                  <br> 
+                  This is because it effectively applies circular convolution: Once the kernel hits one side, it can seamlessly operate on the pixels of the other side. Circular convolution hence renders the feature map as infinite to the kernel, warranting that edge pixels are treated in the same manner as interior pixels.
+                </p>
+              </div>
               
               <div style='display: flex; flex-direction: row;'>
                 <div class="summary_div">
@@ -244,24 +249,23 @@
 
           <div id="symmetric" class="tabcontent">
             <h4> Mirror Padding (SYMMETRIC)</h4>
+            <div class="intro_div">
               <p>
                 <img src="/image/symmetric.png" class="big_icon"> 
                 This algorithm warrants that each pixel is involved in the same number of convolutional operations. It is important to notice that, unlike under circular convolution, these operations do not utilize the kernel pixels uniformly as we demonstrate in detail.
-                <br>
-                <br>
-                <br>
-                <br>
-                <br>
               </p>
-            <button class="opts active" onclick="click_symmetric(event, 1)">
-              3x3 kernel, 1px padding
-            </button>
-            <button class="opts" onclick="click_symmetric(event, 2)">
-              5x5 kernel, 2px padding
-            </button>  
-            <button class="opts" onclick="click_symmetric(event, 3)">
-              3x3 kernel, 1px padding, dilation factor = 2
-            </button>  
+            </div>
+            <div class="button_group">
+              <button class="opts active" onclick="click_symmetric(event, 1)">
+                3x3 kernel, 1px padding
+              </button>
+              <button class="opts" onclick="click_symmetric(event, 2)">
+                5x5 kernel, 2px padding
+              </button>  
+              <button class="opts" onclick="click_symmetric(event, 3)">
+                3x3 kernel, 1px padding, dilation factor = 2
+              </button>  
+            </div>
 
             <div style='display: flex; flex-direction: row;'>
               <div class="summary_div">
@@ -308,15 +312,12 @@
 
           <div id="reflect" class="tabcontent">
             <h4> Mirror Padding (REFLECT)</h4>
-            <p>
-              <img src="/image/reflect.png" class="big_icon"> 
-              This algorithm is illustrated on a 3 × 3 kernel without dilation. <br><br>
-              <br>
-                <br>
-                <br>
-                <br>
-                <br>
-            </p>
+            <div class="intro_div">
+              <p>
+                <img src="/image/reflect.png" class="big_icon"> 
+                This algorithm is illustrated on a 3 × 3 kernel without dilation. <br><br>
+              </p>
+            </div>
             
             <div style='display: flex; flex-direction: row;'>
               <div class="summary_div">
@@ -361,16 +362,12 @@
 
           <div id="replicate" class="tabcontent">
             <h4>Replication Padding</h4>
-            <p>
-              <img src="/image/replicate.png" class="big_icon"> 
-              This algorithm is illustrated on a 5 × 5 kernel without dilation. We choose this kernel size since a 3×3 kernel under SAME padding would render the algorithm equivalent to SYMMETRIC mirror padding.
-              <br>
-              <br>
-                <br>
-                <br>
-                <br>
-                <br>
-            </p>
+            <div class="intro_div">
+              <p>
+                <img src="/image/replicate.png" class="big_icon"> 
+                This algorithm is illustrated on a 5 × 5 kernel without dilation. We choose this kernel size since a 3×3 kernel under SAME padding would render the algorithm equivalent to SYMMETRIC mirror padding.
+              </p>
+            </div>
             
             <div style='display: flex; flex-direction: row;'>
               <div class="summary_div">
@@ -384,11 +381,12 @@
 
             </div>
 
-            <p>
-              <b>Step-by-step illustration</b><br>
-              Padded Input:
-            </p>
             <div>
+              <p>
+                <b>Step-by-step illustration</b><br>
+                Padded Input:
+              </p>
+
               <div style='display: flex; flex-direction: row;'>
                 <table id="replicate_demo" class="summary_div"><tbody></tbody></table>
                 
@@ -416,17 +414,12 @@
 
           <div id="partial_conv" class="tabcontent">
             <h4>Partial Convolution</h4>
-            <p>
-              <img src="/image/partial_conv.png" class="big_icon"> 
-              This algorithm is illustrated on a 3 × 3 kernel without dilation. Its foveation behavior is analogous to REFLECT mirror padding.
-              <br>
-              <br>
-                <br>
-                <br>
-                <br>
-                <br>
-                <br>
-            </p>
+            <div class="intro_div">
+              <p>
+                <img src="/image/partial_conv.png" class="big_icon"> 
+                This algorithm is illustrated on a 3 × 3 kernel without dilation. Its foveation behavior is analogous to REFLECT mirror padding.
+              </p>
+            </div>
             
             <div style='display: flex; flex-direction: row;'>
               <div class="summary_div">

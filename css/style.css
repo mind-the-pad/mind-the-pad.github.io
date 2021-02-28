@@ -142,6 +142,10 @@ td{
   cursor: pointer;
 }
 
+.intro_div {
+  min-height: 200px;
+}
+
 .big_icon {
   width: 150px;
   height: 150px;
@@ -152,4 +156,8 @@ td{
 
 .disable_button {
   display: none;
+}
+
+.button_group button {
+  margin-right: 20px
 }

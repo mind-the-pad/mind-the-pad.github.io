@@ -102,7 +102,7 @@ demo_display = {
   	paused = false;
 
  	// initialize
- 	if ( opt != 'symmetric') {
+ 	if ( opt !== 'symmetric') {
  		rendered[opt] = true;
  		initialize_static_table(opt);
  	} else {
