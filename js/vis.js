@@ -46,12 +46,12 @@ demo_display = {
  }
 
  let used_display = {
- 	3: [[0, 0, 0], [0, 0, 0], [0, 0, 0]],
- 	5: [[0, 0, 0, 0, 0],
-	 	[0, 0, 0, 0, 0],
-	 	[0, 0, 0, 0, 0],
-	 	[0, 0, 0, 0, 0],
-	 	[0, 0, 0, 0, 0],]
+ 	3: [["", "", ""], ["", "", ""], ["", "", ""]],
+ 	5: [["", "", "", "", ""],
+	 	["", "", "", "", ""],
+	 	["", "", "", "", ""],
+	 	["", "", "", "", ""],
+	 	["", "", "", "", ""],]
  };
 
  let display_size = {
@@ -99,10 +99,6 @@ demo_display = {
  		.style('margin-top', '25px');
 
   	paused = false;
-
-  	// set summary size
-  	d3.select(`#${opt}_turn`)
-  		.style('width', '20px')
 
  	// initialize
  	if ( opt === 'symmetric') {
@@ -460,11 +456,11 @@ function update_demo(opt, previous) {
 		rendered_conv--;
 		if (rendered_conv == 0) rendered_conv = tot_conv_involved[opt][select_x][select_y];
 		d3.select(`#${opt}_turn`)
-			.html(count > 1 ? `${rendered_conv-count} to ${rendered_conv}` : rendered_conv);
+			.html(count > 1 ? `${rendered_conv-count} to ${rendered_conv} / ${tot_conv_involved[opt][select_x][select_y]}` : `${rendered_conv} / ${tot_conv_involved[opt][select_x][select_y]}`);
 	} else {
 		rendered_conv++;
 		d3.select(`#${opt}_turn`)
-			.html(count > 1 ? `${rendered_conv} to ${rendered_conv+count-1}` : rendered_conv);
+			.html(count > 1 ? `${rendered_conv} to ${rendered_conv+count-1} / ${tot_conv_involved[opt][select_x][select_y]}` : `${rendered_conv} / ${tot_conv_involved[opt][select_x][select_y]}`);
 		rendered_conv += count - 1;
 	}
 	

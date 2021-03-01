@@ -83,7 +83,7 @@ function click_play(opt) {
   window.clearInterval(timer);
   d3.select(`#${opt}_play`)
     .attr("src", "icon/pause.png")
-    .on("click", d => click_pause('valid'))
+    .on("click", d => click_pause(opt))
   timer = window.setInterval(() => update_demo(opt), 500); 
   paused = false;
 }
@@ -92,7 +92,7 @@ function click_pause(opt) {
   window.clearInterval(timer);
   d3.select(`#${opt}_play`)
     .attr("src", "icon/play.png")
-    .on("click", d => click_play('valid'))
+    .on("click", d => click_play(opt))
   paused = true;
 }
 
