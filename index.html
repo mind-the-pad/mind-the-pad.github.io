@@ -374,13 +374,16 @@
 
             <div>
               <p>
-                <b>Step-by-step illustration</b><br>
-                Padded Input:
+                <b>Step-by-step illustration</b>
               </p>
 
               <div style='display: flex; flex-direction: row;'>
-                <table id="replicate_demo" class="summary_div"><tbody></tbody></table>
-                
+                <div style="display: flex; flex-direction: column;">
+                  <p>
+                    Padded Input:
+                  </p>
+                  <table id="replicate_demo" class="summary_div"><tbody></tbody></table>
+                </div>
                 <div style="display: flex; flex-direction: column;" class="step_summary">
                   <p> Selected pixel <span id="replicate_select"> ___ </span>  <br>
                   Conv_op no. <span id="replicate_turn"> ___ </span> that involves this pixel.</p>
