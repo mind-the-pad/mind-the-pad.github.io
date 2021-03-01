@@ -96,30 +96,27 @@
               <p>
                 <b>Step-by-step illustration</b>
               </p>
+              <div style="display: flex">
+                <p style="margin: 0px 10px 0px 0px;">
+                  Display conv operations that involve the selected pixel:
+                </p>
+                <input class="play" id="valid_previous" type="image" onclick="click_previous('valid')" src="icon/previous.png"/>
+                <input class="play" id="valid_play" type="image"/>
+                <input class="play" id="valid_next" type="image" onclick="click_next('valid')" src="icon/next.png"/>
+              </div>
                 
               <div style='display: flex; flex-direction: row;'>
                 <div style="display: flex; flex-direction: column;">
                   <p>Padded Input:</p>
                   <table id="valid_demo" class="summary_div"><tbody></tbody></table>
                 </div>
-                <div style='display: flex; flex-direction: column' class="step_summary">
-                  <p> Selected pixel: <span id="valid_select"> ___ </span>  <br>
-                  Conv_op no. <span id="valid_turn"> ___ </span> that involves this pixel.</p>
 
-                  <div>
-                    <input class="play" id="valid_previous" type="image" onclick="click_previous('valid')" src="icon/previous.png"/>
-                    <input class="play" id="valid_play" type="image"/>
-                    <input class="play" id="valid_next" type="image" onclick="click_next('valid')" src="icon/next.png"/>
-                  </div>
-
-                  <div id="valid_overview" class="center_div">
-                    <p>
-                      <b>Overview of used kernel cells:</b>
-                    </p>
-                    <table id="valid_used"><tbody></tbody></table>
-                    <p>sum = <span id='valid_used_sum'></span></p>
-                  </div>
-
+                <div id="valid_overview" class="center_div">
+                  <p>
+                    <b>Overview of used kernel cells:</b>
+                  </p>
+                  <table id="valid_used"><tbody></tbody></table>
+                  <p>sum = <span id='valid_used_sum'></span></p>
                 </div>
               </div>
             </div>
