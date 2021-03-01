@@ -310,8 +310,8 @@ function initialize_static_table(opt,) {
 			.html(d => d)
 	})
 
-	d3.select(`#${opt}_overview`)
-		.style('display', 'flex');
+	// d3.select(`#${opt}_overview`)
+	//	.style('display', 'flex');
 }
 
 function update_used_table(opt, ii, jj) {
