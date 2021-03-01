@@ -94,13 +94,14 @@
             
             <div>
               <p>
-                <b>Step-by-step illustration</b><br>
-                Padded Input:
+                <b>Step-by-step illustration</b>
               </p>
                 
               <div style='display: flex; flex-direction: row;'>
-                <table id="valid_demo" class="summary_div"><tbody></tbody></table>
-
+                <div style="display: flex; flex-direction: column;">
+                  <p>Padded Input:</p>
+                  <table id="valid_demo" class="summary_div"><tbody></tbody></table>
+                </div>
                 <div style='display: flex; flex-direction: column' class="step_summary">
                   <p> Selected pixel: <span id="valid_select"> ___ </span>  <br>
                   Conv_op no. <span id="valid_turn"> ___ </span> that involves this pixel.</p>
@@ -151,12 +152,14 @@
 
             <div>
               <p>
-                <b>Step-by-step illustration</b><br>
-                Padded Input:
+                <b>Step-by-step illustration</b>
               </p>
 
               <div style='display: flex; flex-direction: row;'>
-                <table id="zero_demo" class="summary_div"><tbody></tbody></table>
+                <div style="display: flex; flex-direction: column;">
+                  <p>Padded Input:</p>
+                  <table id="zero_demo" class="summary_div"><tbody></tbody></table>
+                </div>
 
                 <div style="display: flex; flex-direction: column;" class="step_summary">
                   <p> Selected pixel: <span id="zero_select"> ___ </span>  <br>
@@ -209,12 +212,15 @@
 
             <div>
               <p>
-                <b>Step-by-step illustration</b><br>
-                Padded Input:
+                <b>Step-by-step illustration</b>
               </p>
 
               <div style='display: flex; flex-direction: row;'>
-                <table id="circular_demo" class="summary_div"><tbody></tbody></table>
+                <div style="display: flex; flex-direction: column;">
+                  <p>Padded Input:</p>
+                  <table id="circular_demo" class="summary_div"><tbody></tbody></table>
+                </div>
+                <table id="" class="summary_div"><tbody></tbody></table>
                 <div style="display: flex; flex-direction: column;" class="step_summary">
                   <p> Selected pixel: <span id="circular_select"> ___ </span>  <br>
                   Conv_op no. <span id="circular_turn"> ___ </span> that involves this pixel.</p>
@@ -271,12 +277,14 @@
 
             <div>
               <p>
-                <b>Step-by-step illustration</b><br>
-                Padded Input:
+                <b>Step-by-step illustration</b>
               </p>
 
               <div style='display: flex; flex-direction: row;'>
-                <table id="symmetric_demo" class="summary_div"><tbody></tbody></table>
+                <div style="display: flex; flex-direction: column;">
+                  <p>Padded Input:</p>
+                  <table id="symmetric_demo" class="summary_div"><tbody></tbody></table>
+                </div>
                 
                 <div style="display: flex; flex-direction: column;" class="step_summary">
                   <p> Selected pixel: <span id="symmetric_select"> ___ </span>  <br>
@@ -323,12 +331,14 @@
 
             <div>
               <p>
-                <b>Step-by-step illustration</b><br>
-                Padded Input:
+                <b>Step-by-step illustration</b>
               </p>
 
               <div style='display: flex; flex-direction: row;'>
-                <table id="reflect_demo" class="summary_div"><tbody></tbody></table>
+                <div style="display: flex; flex-direction: column;">
+                  <p>Padded Input:</p>
+                  <table id="reflect_demo" class="summary_div"><tbody></tbody></table>
+                </div>
                 <div style="display: flex; flex-direction: column;" class="step_summary">
                   <p> Selected pixel: <span id="reflect_select"> ___ </span>  <br>
                   Conv_op no. <span id="reflect_turn"> ___ </span> that involves this pixel.</p>
@@ -428,18 +438,20 @@
 
             <div>
               <p>
-                <b>Step-by-step illustration</b><br>
-                Padded Input:
+                <b>Step-by-step illustration</b>
               </p>
 
               <div style='display: flex; flex-direction: row;'>
-                <table id="partial_conv_demo" class="summary_div"><tbody></tbody></table>
-              
+                <table id="" class="summary_div"><tbody></tbody></table>
+                <div style="display: flex; flex-direction: column;">
+                  <p>Padded Input:</p>
+                  <table id="partial_conv_demo" class="summary_div"><tbody></tbody></table>
+                </div>
                 <div style="display: flex; flex-direction: column;" class="step_summary">
                   <p> Selected pixel: <span id="partial_conv_select"> ___ </span>  <br>
                   Highlight the weighted kernel cells: <span id="partial_conv_turn"> ___ </span>.</p>
 
-                  <div style='display: flex; flex-direction: row; justify-content: space-around;'>
+                  <div style='flex-direction: row; justify-content: space-around;'>
                     <input class="play" type="image" onclick="click_previous('partial_conv')" src="icon/previous.png"/>
                     <input class="play" id="partial_conv_play" type="image"/>
                     <input class="play" type="image" onclick="click_next('partial_conv')" src="icon/next.png"/>
