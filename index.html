@@ -34,8 +34,7 @@
           <p>This interactive visual tool demonstrates how different padding strategies work, and how it leads to spatial bias in CNNs.</p>
 
           <p>
-            Except for <i>VALID</i>, all configurations warrant SAME padding.  
-            Click the pixel represented as a letter in the <b>Input</b> image, a step-by-step illustration of how this padding strategy works will show below.
+            Click the pixel represented as a letter in the <b>Input</b> image, a step-by-step illustration of how this padding strategy works will show below. The interactive illustrations are just for one conv layer, and than the multiple conv layers in a CNN will iteratively emphasize the foveation behavior as shown in the image in the view of each padding strategy.
           </p>
         </div>
       </div>
@@ -112,7 +111,7 @@
 
                 <div style='display: flex; flex-direction: column' class="step_summary">
                   <p> Selected pixel <span id="valid_select"> ___ </span>  <br>
-                  Display the no.<span id="valid_turn"> ___ </span> convolution involved.</p>
+                  Display the no.<span id="valid_turn"> ___ </span> kernel cell(s) involved.</p>
 
                   <div style='display: flex; flex-direction: row; justify-content: space-around;'>
                     <input class="play" id="valid_previous" type="image" onclick="click_previous('valid')" src="icon/previous.png"/>
@@ -169,7 +168,7 @@
 
                 <div style="display: flex; flex-direction: column;" class="step_summary">
                   <p> Selected pixel <span id="zero_select"> ___ </span>  <br>
-                  Display the no.<span id="zero_turn"> ___ </span> convolution involved.</p>
+                  Display the no.<span id="zero_turn"> ___ </span> kernel cell(s) involved.</p>
 
                   <div style='display: flex; flex-direction: row; justify-content: space-around;'>
                     <input class="play" type="image" onclick="click_previous('zero')" src="icon/previous.png"/>
@@ -226,7 +225,7 @@
                 <table id="circular_demo" class="summary_div"><tbody></tbody></table>
                 <div style="display: flex; flex-direction: column;" class="step_summary">
                   <p> Selected pixel <span id="circular_select"> ___ </span>  <br>
-                  Display the no.<span id="circular_turn"> ___ </span> convolution involved.</p>
+                  Display the no.<span id="circular_turn"> ___ </span> kernel cell(s) involved.</p>
 
                   <div style='display: flex; flex-direction: row; justify-content: space-around;'>
                     <input class="play" type="image" onclick="click_previous('circular')" src="icon/previous.png"/>
@@ -289,7 +288,7 @@
                 
                 <div style="display: flex; flex-direction: column;" class="step_summary">
                   <p> Selected pixel <span id="symmetric_select"> ___ </span>  <br>
-                  Display the no.<span id="symmetric_turn"> ___ </span> convolution involved.</p>
+                  Display the no.<span id="symmetric_turn"> ___ </span> kernel cell(s) involved.</p>
 
                   <div style='display: flex; flex-direction: row; justify-content: space-around;'>
                     <input class="play" type="image" onclick="click_previous('symmetric')" src="icon/previous.png"/>
@@ -340,7 +339,7 @@
                 <table id="reflect_demo" class="summary_div"><tbody></tbody></table>
                 <div style="display: flex; flex-direction: column;" class="step_summary">
                   <p> Selected pixel <span id="reflect_select"> ___ </span>  <br>
-                  Display the no.<span id="reflect_turn"> ___ </span> convolution involved.</p>
+                  Display the no.<span id="reflect_turn"> ___ </span> kernel cell(s) involved.</p>
 
                    <div style='display: flex; flex-direction: row; justify-content: space-around;'>
                     <input class="play" type="image" onclick="click_previous('reflect')" src="icon/previous.png"/>
@@ -392,7 +391,7 @@
                 
                 <div style="display: flex; flex-direction: column;" class="step_summary">
                   <p> Selected pixel <span id="replicate_select"> ___ </span>  <br>
-                  Display the no.<span id="replicate_turn"> ___ </span> convolution involved.</p>
+                  Display the no.<span id="replicate_turn"> ___ </span> kernel cell(s) involved.</p>
 
                   <div style='display: flex; flex-direction: row; justify-content: space-around;'>
                     <input class="play" type="image" onclick="click_previous('replicate')" src="icon/previous.png"/>
