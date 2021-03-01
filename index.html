@@ -19,22 +19,14 @@
   <body>
     <div class="container">
       <div class="row">
-        <div class="twelve columns" style="margin-top: 15%" id='body-container'>
+        <div class="twelve columns" style="margin-top: 40px" id='body-container'>
       
           <h1>Convolution Can Incur Foveation Effects</h1>
           <h5>Jun Yuan, Bilal Alsallakh, Narine Kokhlikyan, Vivek Miglani, Orion Rebliz-Richardson</h5>
       
-          <br><br>
           <p>
-           In this web page, we introduce an interactive web-based visualization demonstrating how boundary treatment in convolutional networks can incur foveation effects: Impacted pixels have fewer ways to contribute to the computation than center pixels. This effect is first reported in a recent work to be presented at ICLR 2021.
-          </p>
-
-          <h3>Padding And Foveation Behavior of CNNs</h3>
-
-          <p>This interactive visual tool demonstrates how different padding strategies work, and how it leads to spatial bias in CNNs.</p>
-
-          <p>
-            Click the pixel represented as a letter in the <b>Input</b> image, a step-by-step illustration of how this padding strategy works will show below. The interactive illustrations are just for one conv layer, and than the multiple conv layers in a CNN will iteratively emphasize the foveation behavior as shown in the image in the view of each padding strategy.
+           This interactive  visualization demonstrates how boundary treatment in convolutional networks can incur foveation effects: Impacted pixels have fewer ways to contribute to the computation than center pixels. This effect is first reported <a href="https://openreview.net/forum?id=m1CD7tPubNy">in a recent work</a> to be presented at ICLR 2021.
+            Click a pixel represented as a letter in the input image. A step-by-step illustration of how each padding strategy works will show up below. The interactive illustrations are just for one conv layer. Successive conv layers in a CNN will gradually make the foveation behavior more pronounced, as shown in the illustrative image in the view of each padding strategy.
           </p>
         </div>
       </div>
