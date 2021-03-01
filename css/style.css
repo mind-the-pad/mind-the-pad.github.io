@@ -143,7 +143,7 @@ td{
 }
 
 .intro_div {
-  min-height: 200px;
+  min-height: 180px;
 }
 
 .big_icon {
@@ -160,4 +160,8 @@ td{
 
 .button_group button {
   margin-right: 20px
+}
+
+.step_summary {
+  width: 350px;
 }

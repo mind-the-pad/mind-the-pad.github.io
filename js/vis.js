@@ -7,8 +7,8 @@
  			  ['u', 'v', 'w', 'x', 'y', 'bi', 'bj','...', '...'], 
  			  ['bk', 'bl', 'bm', 'bn', 'bo', 'bp', 'bq','...', '...'], 
  			  ['br', 'bs', 'bt', 'bu', 'bv', 'bw', 'bx','...', '...'], 
- 			  ['...', '...', '...', '...', '...', '...', '...'], 
- 			  ['...', '...', '...', '...', '...', '...', '...']],
+ 			  ['...', '...', '...', '...', '...', '...', '...', '...', '...',], 
+ 			  ['...', '...', '...', '...', '...', '...', '...', '...', '...',]],
  	// 'zero': [['a', 'b', 'c', '...', '...', ], ['d', 'e', 'f', '...', '...'], ['g', 'h', 'i', '...', '...'], ['...', '...', '...', '...', '...'], ['...', '...', '...', '...', '...']],
  	'circular': [['a', 'b', 'c', 'd', 'e'], 
  				 ['p', '...', '...', '...', 'f'], 
@@ -90,33 +90,31 @@ demo_display = {
  	d3.select(`#${opt}_select`).html('___');
  	d3.select(`#${opt}_turn`).html('___');
 
-
  	// set pause clickable
  	d3.select(`#${opt}_play`)
  		.attr("src", "icon/pause.png")
- 		.on("click", d => click_pause('valid'));
+ 		.on("click", d => click_pause(opt));
 
  	d3.select(`#${opt}_totops`)
  		.style('margin-top', '25px');
 
   	paused = false;
 
+  	// set summary size
+  	d3.select(`#${opt}_turn`)
+  		.style('width', '20px')
+
  	// initialize
- 	if ( opt !== 'symmetric') {
- 		rendered[opt] = true;
- 		initialize_static_table(opt);
- 	} else {
+ 	if ( opt === 'symmetric') {
  		rendered[opt] = true;
  		// clear
  		d3.selectAll('#symmetric_input').remove();
  		d3.selectAll('#symmetric_demo tr').remove();
  		d3.selectAll('#symmetric_totops tr').remove();
  		d3.selectAll('#symmetric_used tr').remove();
- 		d3.select('#symmetric .summary_div img').remove();
- 		d3.select('#symmetric .summary_div span').remove();
- 		// render
- 		initialize_static_table(opt);
  	}
+ 	// rerender
+ 	initialize_static_table(opt);
  }
 
 
@@ -130,6 +128,11 @@ function initialize_static_table(opt,) {
 
 	d3.select(`#${opt}_next`)
 		.attr('title', 'check the next convlution');
+
+	// clear 
+ 	d3.select(`#${opt} .summary_div img`).remove();
+ 	d3.select(`#${opt} .summary_div span`).remove();
+ 	d3.select(`#${opt}_input`).remove();
 
 	// render interaction hint
 	let input_node = d3.select(`#${opt} .summary_div`)
@@ -184,7 +187,6 @@ function initialize_static_table(opt,) {
 					d3.select(`#${opt}-input-${select_pixel[opt][1]}-${select_pixel[opt][2]}`)
 						.style('background-color', 'white');
 					d3.select(`#${opt}-totops-${select_pixel[opt][1]}-${select_pixel[opt][2]}`)
-						// .style('background-color', 'white');
 						.style('background-color', baseColors(colorScale[opt](tot_conv_involved[opt][select_pixel[opt][1]][select_pixel[opt][2]])))
 					d3.select(`#${opt}-demo-${select_pixel[opt][1]+pad_size[opt]}-${select_pixel[opt][2]+pad_size[opt]}`)
 						.style('font-weight', 'normal');
@@ -193,7 +195,7 @@ function initialize_static_table(opt,) {
 				// set pause clickable
 			 	d3.select(`#${opt}_play`)
 			 		.attr("src", "icon/pause.png")
-			 		.on("click", d => click_pause('valid'))
+			 		.on("click", d => click_pause(opt))
   				paused = false;
 
 				// highlight
@@ -310,14 +312,10 @@ function initialize_static_table(opt,) {
 	})
 
 	d3.select(`#${opt}_overview`)
-		.style('display', 'none');
+		.style('display', 'flex');
 }
 
 function update_used_table(opt, ii, jj) {
-	// display overview of used cells
-	d3.select(`#${opt}_overview`)
-		.style('display', 'flex');
-
 	// calculate the used cells
 	let used_display_to_render = get_tot_conv_at(opt, ii, jj, display_size[opt]);
 
@@ -557,12 +555,12 @@ function render_demo_border(opt, demo_table) {
 		})
 	} else {
 		// upper border
-		d3.range(2,9).forEach(ix => {
+		d3.range(2,11).forEach(ix => {
 			demo_table.select(`#${opt}-demo-1-${ix}`)
 				.style('border-bottom', '1px solid black');
 		})
 		// left border
-		d3.range(2,9).forEach(ix => {
+		d3.range(2,11).forEach(ix => {
 			demo_table.select(`#${opt}-demo-${ix}-1`)
 				.style('border-right', '1px solid black');
 		})

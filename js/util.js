@@ -92,8 +92,8 @@ function add_symmetric_padding(kernal_size, padding_size) {
     	arr.unshift(arr[2].slice());
 
 		// add the bottom content
-		arr.push(['...', '...', '...', '...', '...', '...', '...', '...', '...',]);
-		arr.push(['...', '...', '...', '...', '...', '...', '...', '...', '...',]);
+		arr.push(['...', '...', '...', '...', '...', '...', '...', '...', '...','...', '...',]);
+		arr.push(['...', '...', '...', '...', '...', '...', '...', '...', '...','...', '...',]);
 
     	// add the left padding
     	for (let i = 0; i < arr.length; i++) {
@@ -137,8 +137,8 @@ function add_replicate_padding() {
 	arr.unshift(arr[1].slice());
 
 	// add the bottom content
-	arr.push(['...', '...', '...', '...', '...', '...', '...','...', '...',]);
-	arr.push(['...', '...', '...', '...', '...', '...', '...','...', '...',]);
+	arr.push(['...', '...', '...', '...', '...', '...', '...','...', '...', '...', '...',]);
+	arr.push(['...', '...', '...', '...', '...', '...', '...','...', '...', '...', '...',]);
 
 	// add the left padding
 	for (let i = 0; i < arr.length; i++) {
