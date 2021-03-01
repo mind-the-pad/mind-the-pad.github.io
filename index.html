@@ -80,7 +80,7 @@
 
             <div class='intro_div'>
               <p>
-                <img src="/image/valid.png" class="big_icon">
+                <img src="/image/valid_scale.png" class="big_icon">
                 No padding. This strategy assumes that all the dimensions are valid, that is, the input image gets fully covered by a filter and the stride specified. 
                 <br>
                 This algorithm is illustrated on a 3 × 3 kernel without dilation. A larger kernel size or dilation factor will increase the foveation effect.
@@ -139,7 +139,7 @@
             <div style='display: flex; flex-direction: column;'>
               <div class="intro_div">
                 <p>
-                  <img src="/image/zero.png" class="big_icon"> 
+                  <img src="/image/zero_scale.png" class="big_icon"> 
                   Zero padding strategy refers to adding a border of pixels all with value zero around the edges of the input images. This strategy allows us to preserve the original input size.
                   <br>
                   This algorithm is illustrated on a 3 × 3 kernel without dilation. A larger kernel size or dilation factor will increase the foveation effect.
@@ -196,7 +196,7 @@
               
               <div class="intro_div">
                 <p>
-                  <img src="/image/circular.png" class="big_icon"> 
+                  <img src="/image/circular_scale.png" class="big_icon"> 
 
                   This algorithm is illustrated on a 3 × 3 kernel without dilation. It is straightforward to prove that the algorithm warrants equal treatment of the pixels irrespective of the kernel size or dilation factor. 
                   <br> 
@@ -251,7 +251,7 @@
             <h4> Mirror Padding (SYMMETRIC)</h4>
             <div class="intro_div">
               <p>
-                <img src="/image/symmetric.png" class="big_icon"> 
+                <img src="/image/symmetric_scale.png" class="big_icon"> 
                 This algorithm warrants that each pixel is involved in the same number of convolutional operations. It is important to notice that, unlike under circular convolution, these operations do not utilize the kernel pixels uniformly as we demonstrate in detail.
               </p>
             </div>
@@ -314,7 +314,7 @@
             <h4> Mirror Padding (REFLECT)</h4>
             <div class="intro_div">
               <p>
-                <img src="/image/reflect.png" class="big_icon"> 
+                <img src="/image/reflect_scale.png" class="big_icon"> 
                 This algorithm is illustrated on a 3 × 3 kernel without dilation. <br><br>
               </p>
             </div>
@@ -364,7 +364,7 @@
             <h4>Replication Padding</h4>
             <div class="intro_div">
               <p>
-                <img src="/image/replicate.png" class="big_icon"> 
+                <img src="/image/replicate_scale.png" class="big_icon"> 
                 This algorithm is illustrated on a 5 × 5 kernel without dilation. We choose this kernel size since a 3×3 kernel under SAME padding would render the algorithm equivalent to SYMMETRIC mirror padding.
               </p>
             </div>
@@ -416,7 +416,7 @@
             <h4>Partial Convolution</h4>
             <div class="intro_div">
               <p>
-                <img src="/image/partial_conv.png" class="big_icon"> 
+                <img src="/image/partial_conv_scale.png" class="big_icon"> 
                 This algorithm is illustrated on a 3 × 3 kernel without dilation. Its foveation behavior is analogous to REFLECT mirror padding.
               </p>
             </div>

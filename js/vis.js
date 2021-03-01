@@ -181,6 +181,9 @@ function initialize_static_table(opt,) {
 				if (ii > 4 || jj > 4) {
 					return;
 				}
+				if (opt === 'circular' && input_display[opt][ii][jj] === '...') {
+					return;
+				}
 
 				// reset 
 				if (select_pixel[opt]) {
