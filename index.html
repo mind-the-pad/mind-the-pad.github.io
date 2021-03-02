@@ -112,9 +112,7 @@
                 </div>
 
                 <div id="valid_overview" class="center_div">
-                  <p>
-                    <b>Overview of used kernel cells:</b>
-                  </p>
+                  <p>Kernel cells involved:</p>
                   <table id="valid_used" class="summary_div"><tbody></tbody></table>
                   <p>sum = <span id='valid_used_sum'></span></p>
                 </div>
@@ -151,34 +149,29 @@
               <p>
                 <b>Step-by-step illustration</b>
               </p>
-
+              <div style="display: flex">
+                <p style="margin: 0px 10px 0px 0px;">
+                  Display conv operations that involve the selected pixel:
+                </p>
+                <input class="play" type="image" onclick="click_previous('zero')" src="icon/previous.png"/>
+                <input class="play" id="zero_play" type="image"/>
+                <input class="play" type="image" onclick="click_next('zero')" src="icon/next.png"/>
+              </div>
+                
               <div style='display: flex; flex-direction: row;'>
                 <div style="display: flex; flex-direction: column;">
                   <p>Padded Input:</p>
                   <table id="zero_demo" class="summary_div"><tbody></tbody></table>
                 </div>
 
-                <div style="display: flex; flex-direction: column;" class="step_summary">
-                  <p> Selected pixel: <span id="zero_select"> ___ </span>  <br>
-                  Conv_op no <span id="zero_turn"> ___ </span> that involves this pixel.</p>
-
-                  <div>
-                    <input class="play" type="image" onclick="click_previous('zero')" src="icon/previous.png"/>
-                    <input class="play" id="zero_play" type="image"/>
-                    <input class="play" type="image" onclick="click_next('zero')" src="icon/next.png"/>
-                  </div>
-
-                  <div id="zero_overview" class="center_div">
-                    <p>
-                      <b>Overview of used kernel cells:</b><br>
-                    </p>
-                    <table id="zero_used"><tbody></tbody></table>
-                    <p>sum = <span id='zero_used_sum'></span></p>
-                  </div>
+               <div id="zero_overview" class="center_div">
+                  <p>Kernel cells involved:</p>
+                  <table id="zero_used" class="summary_div"><tbody></tbody></table>
+                  <p>sum = <span id='zero_used_sum'></span></p>
                 </div>
-                
               </div>
             </div>
+
           </div>
 
           <div id="circular" class="tabcontent">
@@ -211,33 +204,28 @@
               <p>
                 <b>Step-by-step illustration</b>
               </p>
-
+              <div style="display: flex">
+                <p style="margin: 0px 10px 0px 0px;">
+                  Display conv operations that involve the selected pixel:
+                </p>
+                <input class="play" type="image" onclick="click_previous('circular')" src="icon/previous.png"/>
+                <input class="play" id="circular_play" type="image"/>
+                <input class="play" type="image" onclick="click_next('circular')" src="icon/next.png"/>
+              </div>
+                
               <div style='display: flex; flex-direction: row;'>
                 <div style="display: flex; flex-direction: column;">
                   <p>Padded Input:</p>
                   <table id="circular_demo" class="summary_div"><tbody></tbody></table>
                 </div>
-                <table id="" class="summary_div"><tbody></tbody></table>
-                <div style="display: flex; flex-direction: column;" class="step_summary">
-                  <p> Selected pixel: <span id="circular_select"> ___ </span>  <br>
-                  Conv_op no. <span id="circular_turn"> ___ </span> that involves this pixel.</p>
 
-                  <div>
-                    <input class="play" type="image" onclick="click_previous('circular')" src="icon/previous.png"/>
-                    <input class="play" id="circular_play" type="image"/>
-                    <input class="play" type="image" onclick="click_next('circular')" src="icon/next.png"/>
-                  </div>
-
-                  <div id="circular_overview" class="center_div">
-                    <p>
-                      <b>Overview of used kernel cells:</b><br>
-                    </p>
-                    <table id="circular_used"><tbody></tbody></table>
-                    <p>sum = <span id='circular_used_sum'></span></p>
-                  </div>
-
+                <div id="circular_overview" class="center_div">
+                  <p>Kernel cells involved:</p>
+                  <table id="circular_used" class="summary_div"><tbody></tbody></table>
+                  <p>sum = <span id='circular_used_sum'></span></p>
                 </div>
               </div>
+
             </div>
           </div>
 
@@ -277,32 +265,28 @@
                 <b>Step-by-step illustration</b>
               </p>
 
+              <div style="display: flex">
+                <p style="margin: 0px 10px 0px 0px;">
+                  Display conv operations that involve the selected pixel:
+                </p>
+                <input class="play" type="image" onclick="click_previous('symmetric')" src="icon/previous.png"/>
+                <input class="play" id="symmetric_play" type="image"/>
+                <input class="play" type="image" onclick="click_next('symmetric')" src="icon/next.png"/>
+              </div>
+                
               <div style='display: flex; flex-direction: row;'>
                 <div style="display: flex; flex-direction: column;">
                   <p>Padded Input:</p>
                   <table id="symmetric_demo" class="summary_div"><tbody></tbody></table>
                 </div>
-                
-                <div style="display: flex; flex-direction: column;" class="step_summary">
-                  <p> Selected pixel: <span id="symmetric_select"> ___ </span>  <br>
-                  Conv_op no. <span id="symmetric_turn"> ___ </span> that involves this pixel.</p>
 
-                  <div>
-                    <input class="play" type="image" onclick="click_previous('symmetric')" src="icon/previous.png"/>
-                    <input class="play" id="symmetric_play" type="image"/>
-                    <input class="play" type="image" onclick="click_next('symmetric')" src="icon/next.png"/>
-                  </div>
-
-                  <div id="symmetric_overview" class="center_div">
-                    <p>
-                      <b>Overview of used kernel cells:</b><br>
-                    </p>
-                    <table id="symmetric_used"><tbody></tbody></table>
-                    <p>sum = <span id='symmetric_used_sum'></span></p>
-                  </div>
-
+                <div id="symmetric_overview" class="center_div">
+                  <p>Kernel cells involved:</p>
+                  <table id="symmetric_used"><tbody></tbody></table>
+                  <p>sum = <span id='symmetric_used_sum'></span></p>
                 </div>
               </div>
+
             </div>
           </div>
 
@@ -330,31 +314,28 @@
               <p>
                 <b>Step-by-step illustration</b>
               </p>
-
+              <div style="display: flex">
+                <p style="margin: 0px 10px 0px 0px;">
+                  Display conv operations that involve the selected pixel:
+                </p>
+                <input class="play" type="image" onclick="click_previous('reflect')" src="icon/previous.png"/>
+                <input class="play" id="reflect_play" type="image"/>
+                <input class="play" type="image" onclick="click_next('reflect')" src="icon/next.png"/>
+              </div>
+                
               <div style='display: flex; flex-direction: row;'>
                 <div style="display: flex; flex-direction: column;">
                   <p>Padded Input:</p>
                   <table id="reflect_demo" class="summary_div"><tbody></tbody></table>
                 </div>
-                <div style="display: flex; flex-direction: column;" class="step_summary">
-                  <p> Selected pixel: <span id="reflect_select"> ___ </span>  <br>
-                  Conv_op no. <span id="reflect_turn"> ___ </span> that involves this pixel.</p>
 
-                  <div>
-                    <input class="play" type="image" onclick="click_previous('reflect')" src="icon/previous.png"/>
-                    <input class="play" id="reflect_play" type="image"/>
-                    <input class="play" type="image" onclick="click_next('reflect')" src="icon/next.png"/>
-                  </div>
-
-                  <div id="reflect_overview" class="center_div">
-                    <p>
-                      <b>Overview of used kernel cells:</b><br>
-                    </p>
-                    <table id="reflect_used"><tbody></tbody></table>
-                    <p>sum = <span id='reflect_used_sum'></span></p>
-                  </div>
+                <div id="reflect_overview" class="center_div">
+                  <p>Kernel cells involved:</p>
+                  <table id="reflect_used"><tbody></tbody></table>
+                  <p>sum = <span id='reflect_used_sum'></span></p>
                 </div>
               </div>
+            
             </div>
           </div>
 
@@ -383,33 +364,27 @@
               <p>
                 <b>Step-by-step illustration</b>
               </p>
-
+              <div style="display: flex">
+                <p style="margin: 0px 10px 0px 0px;">
+                  Display conv operations that involve the selected pixel:
+                </p>
+                <input class="play" type="image" onclick="click_previous('replicate')" src="icon/previous.png"/>
+                <input class="play" id="replicate_play" type="image"/>
+                <input class="play" type="image" onclick="click_next('replicate')" src="icon/next.png"/>
+              </div>
+                
               <div style='display: flex; flex-direction: row;'>
                 <div style="display: flex; flex-direction: column;">
-                  <p>
-                    Padded Input:
-                  </p>
+                  <p>Padded Input:</p>
                   <table id="replicate_demo" class="summary_div"><tbody></tbody></table>
                 </div>
-                <div style="display: flex; flex-direction: column;" class="step_summary">
-                  <p> Selected pixel: <span id="replicate_select"> ___ </span>  <br>
-                  Conv_op no. <span id="replicate_turn"> ___ </span> that involves this pixel.</p>
-
-                  <div>
-                    <input class="play" type="image" onclick="click_previous('replicate')" src="icon/previous.png"/>
-                    <input class="play" id="replicate_play" type="image"/>
-                    <input class="play" type="image" onclick="click_next('replicate')" src="icon/next.png"/>
-                  </div>
-
-                  <div id="replicate_overview" class="center_div">
-                    <p>
-                      <b>Overview of used kernel cells:</b><br>
-                    </p>
-                    <table id="replicate_used"><tbody></tbody></table>
-                    <p>sum = <span id='replicate_used_sum'></span></p>
-                  </div>
+                <div id="replicate_overview" class="center_div">
+                  <p>Kernel cells involved:</p>
+                  <table id="replicate_used"><tbody></tbody></table>
+                  <p>sum = <span id='replicate_used_sum'></span></p>
                 </div>
               </div>
+              
             </div>
           </div>
 
@@ -437,32 +412,28 @@
               <p>
                 <b>Step-by-step illustration</b>
               </p>
-
+              <div style="display: flex">
+                <p style="margin: 0px 10px 0px 0px;">
+                  Display conv operations that involve the selected pixel:
+                </p>
+                <input class="play" type="image" onclick="click_previous('partial_conv')" src="icon/previous.png"/>
+                <input class="play" id="partial_conv_play" type="image"/>
+                <input class="play" type="image" onclick="click_next('partial_conv')" src="icon/next.png"/>
+              </div>
+                
               <div style='display: flex; flex-direction: row;'>
-                <table id="" class="summary_div"><tbody></tbody></table>
                 <div style="display: flex; flex-direction: column;">
                   <p>Padded Input:</p>
                   <table id="partial_conv_demo" class="summary_div"><tbody></tbody></table>
                 </div>
-                <div style="display: flex; flex-direction: column;" class="step_summary">
-                  <p> Selected pixel: <span id="partial_conv_select"> ___ </span>  <br>
-                  Highlight the weighted kernel cells: <span id="partial_conv_turn"> ___ </span>.</p>
 
-                  <div>
-                    <input class="play" type="image" onclick="click_previous('partial_conv')" src="icon/previous.png"/>
-                    <input class="play" id="partial_conv_play" type="image"/>
-                    <input class="play" type="image" onclick="click_next('partial_conv')" src="icon/next.png"/>
-                  </div>
-
-                  <div id="partial_conv_overview" class="center_div">
-                    <p>
-                      <b>Overview of used kernel cells:</b><br>
-                    </p>
-                    <table id="partial_conv_used"><tbody></tbody></table>
-                    <p>sum = <span id='partial_conv_used_sum'></span></p>
-                  </div>
+                <div id="partial_conv_overview" class="center_div">
+                  <p>Kernel cells involved:</p>
+                  <table id="partial_conv_used"><tbody></tbody></table>
+                  <p>sum = <span id='partial_conv_used_sum'></span></p>
                 </div>
               </div>
+
             </div>
           </div>
         </div>
