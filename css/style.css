@@ -150,9 +150,8 @@ td{
 .big_icon {
   width: 160px;
   height: 150px;
-  float: left;
+  float: right;
   padding:0 20px;
-  margin: 10px 0;
 }
 
 .disable_button {
