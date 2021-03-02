@@ -158,10 +158,6 @@ td{
   display: none;
 }
 
-.button_group button {
-  margin-right: 20px
-}
-
 .step_summary {
   width: 350px;
 }
