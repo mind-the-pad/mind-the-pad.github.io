@@ -25,8 +25,13 @@
           <h5>Jun Yuan, Bilal Alsallakh, Narine Kokhlikyan, Vivek Miglani, Orion Rebliz-Richardson</h5>
       
           <p>
-           This interactive  visualization demonstrates how boundary treatment in convolutional networks can incur foveation effects: Impacted pixels have fewer ways to contribute to the computation than center pixels. This effect is first reported <a href="https://openreview.net/forum?id=m1CD7tPubNy">in a recent work</a> to be presented at ICLR 2021.
-            Click a pixel represented as a letter in the input image. A step-by-step illustration of how each padding strategy works will show up below. The interactive illustrations are just for one conv layer. Successive conv layers in a CNN will gradually make the foveation behavior more pronounced, as shown in the illustrative image in the view of each padding strategy.
+           This interactive  visualization demonstrates how boundary treatment in convolutional networks can incur foveation effects:
+            Impacted pixels have fewer ways to contribute to the computation than center pixels. This effect is first reported <a href="https://openreview.net/forum?id=m1CD7tPubNy">in an ICLR 2020 paper</a>.
+            <br>
+           Select a padding method to analyze its foveation effects.
+           The interactive visualization will illustrate these effects for one convolutional layer, in order to communicate how boundary pixels are treated.
+            <br>
+           Successive convolutional layers in a CNN will gradually amplify any disparity in pixel treatment, as shown in the top-right image with a VGG-19 network.
           </p>
         </div>
       </div>
@@ -434,7 +439,7 @@
                 </div>
               </div>
 
-            </div>
+            </div> 
           </div>
         </div>
       </div>
