@@ -128,14 +128,15 @@
           </div>
 
           <div id="zero" class="tabcontent">
-            <h4>Zero Padding</h4>
+            <h4>Zero Padding (SAME)</h4>
             <div style='display: flex; flex-direction: column;'>
               <div class="intro_div">
                 <p>
                   <img src="/image/zero_scale.png" class="big_icon"> 
-                  Zero padding strategy refers to adding a border of pixels all with value zero around the edges of the input images. This strategy allows us to preserve the original input size.
-                  <br>
-                  This algorithm is illustrated on a 3 × 3 kernel without dilation. A larger kernel size or dilation factor will increase the foveation effect.
+                  The most common solution to compute an output of same dimension as the input is to pad the input with zeros.
+                  WIth a 3 × 3 kernel, the needed padding amount is 1-pixel.
+                  The foveation effect is mild, compared with VALID padding.
+                  Larger kernel sizes or dilation factors further amplify the foveation effect.
                 </p>
               </div>
               
