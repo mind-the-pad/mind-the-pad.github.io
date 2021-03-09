@@ -29,9 +29,13 @@
             Impacted pixels have fewer ways to contribute to the computation than center pixels. This effect is first reported <a href="https://openreview.net/forum?id=m1CD7tPubNy">in an ICLR 2020 paper</a>.
             <br>
            Select a padding method to analyze its foveation effects.
-           The interactive visualization will illustrate these effects for one convolutional layer, in order to communicate how boundary pixels are treated.
+            <ul>
+              <li>The interactive visualization will illustrate these effects for one convolutional layer, in order to communicate how boundary pixels are treated.</li>
+              <li>Successive convolutional layers will gradually amplify any disparity in pixel treatment, as shown in the top-right (static) image for a VGG-19 network.</li>
+          </ul>
+           
             <br>
-           Successive convolutional layers in a CNN will gradually amplify any disparity in pixel treatment, as shown in the top-right image with a VGG-19 network.
+           .
           </p>
         </div>
       </div>
@@ -188,10 +192,9 @@
               <div class="intro_div">
                 <p>
                   <img src="/image/circular_scale.png" class="big_icon"> 
-
-                  This algorithm is illustrated on a 3 × 3 kernel without dilation. It is straightforward to prove that the algorithm warrants equal treatment of the pixels irrespective of the kernel size or dilation factor. 
-                  <br> 
-                  This is because it effectively applies circular convolution: Once the kernel hits one side, it can seamlessly operate on the pixels of the other side. Circular convolution hence renders the feature map as infinite to the kernel, warranting that edge pixels are treated in the same manner as interior pixels.
+                  This SAME-padding method effectively applies circular convolution: Once the kernel hits one side, it can seamlessly operate on the pixels of the other side.
+                  Circular convolution hence renders the feature map as infinite to the kernel, warranting that edge pixels are treated in the same manner as interior pixels.
+                  It is straightforward to prove that the algorithm warrants equal treatment of the pixels irrespective of the kernel size or dilation factor. 
                 </p>
               </div>
               
@@ -241,7 +244,9 @@
             <div class="intro_div">
               <p>
                 <img src="/image/symmetric_scale.png" class="big_icon"> 
-                This algorithm warrants that each pixel is involved in the same number of convolutional operations. It is important to notice that, unlike under circular convolution, these operations do not utilize the kernel pixels uniformly as we demonstrate in detail.
+                Like circular padding, this SAME-padding method also warrants that each pixel is involved in the same number of convolutional operations.
+                However, unlike under circular convolution, these operations do not utilize the kernel pixels uniformly (e.g. compare pixels "a", "b", "f", and "g").
+                The numbers warranty holds with a larger kernel size or under dilation, check that for yourself!
               </p>
             </div>
             <div class="button_group">
@@ -302,7 +307,8 @@
             <div class="intro_div">
               <p>
                 <img src="/image/reflect_scale.png" class="big_icon"> 
-                This algorithm is illustrated on a 3 × 3 kernel without dilation. <br><br>
+                This SAME-padding method mirrors the edges starting from the 2nd pixel, i.e., without including the border pixels itself.
+                This reduces the contribution of the border pixels and over-emphasizes the contribution of the 2nd pixel. 
               </p>
             </div>
             
@@ -351,7 +357,9 @@
             <div class="intro_div">
               <p>
                 <img src="/image/replicate_scale.png" class="big_icon"> 
-                This algorithm is illustrated on a 5 × 5 kernel without dilation. We choose this kernel size since a 3×3 kernel under SAME padding would render the algorithm equivalent to SYMMETRIC mirror padding.
+                This SAME padding replicates the border pixels only to fill the needed padding area.
+                With a 1-pixel padding area, the result is equivalent to SYMMETRIC mirror padding.
+                However, for a 2-pixel padding area (needed with a 5 × 5 kernel), the method overemphasizes the border pixels at the cost of reducing contributions of the inner pixels adjacent to them.
               </p>
             </div>
             
@@ -396,11 +404,13 @@
           </div>
 
           <div id="partial_conv" class="tabcontent">
-            <h4>Partial Convolution</h4>
+            <h4><a href="https://github.com/NVIDIA/partialconv">Partial Convolution</a></h4>
             <div class="intro_div">
               <p>
                 <img src="/image/partial_conv_scale.png" class="big_icon"> 
-                This algorithm is illustrated on a 3 × 3 kernel without dilation. Its foveation behavior is analogous to REFLECT mirror padding.
+                This method avoid explicit padding by treating padding area as missing pixels.
+                The convolution computed at each location only sums contributions of valid pixels, and reweighs the computed sum in case padding pixels were present.
+                Due to the weights used, the foveation behavior is analogous to REFLECT mirror padding.
               </p>
             </div>
             
