@@ -72,14 +72,15 @@
           </div>
 
           <div id="valid" class="tabcontent" style="display: block;">
-            <h4>VALID Padding</h4>
+            <h4>VALID Padding (No Padding)</h4>
 
             <div class='intro_div'>
               <p>
                 <img src="/image/valid_scale.png" class="big_icon">
-                No padding. This strategy assumes that all the dimensions are valid, that is, the input image gets fully covered by a filter and the stride specified. 
-                <br>
-                This algorithm is illustrated on a 3 × 3 kernel without dilation. A larger kernel size or dilation factor will increase the foveation effect.
+                This method restricts convolution within the proper dimensions of the image.
+                With a kernel size larger than 1x1, the output the method computes is smaller than the input and the foveation effect is strong.
+                Processing the input over multiple layers rapidly increases the foveation effect.
+                Larger kernel sizes or dilation factors further amplify the foveation effect.
               </p>
             </div>
 
