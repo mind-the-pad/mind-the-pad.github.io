@@ -10,7 +10,10 @@ function calculate_demo_display(opt) {
 			demo_display[opt] = input_display['basic'].slice();
 			return;
 		case 'zero':
-			demo_display[opt] = add_zero_padding();
+			demo_display[opt] = add_zero_padding(1);
+			return;
+		case 'zero_full':
+			demo_display[opt] = add_zero_padding(2);
 			return;
 		case 'circular':
 			demo_display[opt] = add_circular_padding();
@@ -55,18 +58,32 @@ function add_circular_padding() {
 	return arr;
 }
 
-function add_zero_padding() {
+function add_zero_padding(padding_size) {
 	let arr = [];
 
 	for (let i = 0; i < input_display['basic'].length; i++)
     	arr[i] = input_display['basic'][i].slice();
 
 	// make the top padding
-	arr.unshift(['0', '0', '0', '0', '0', '0', '0', '0', '0']);
+	if (padding_size == 1) {
+		arr.unshift(['0', '0', '0', '0', '0', '0', '0', '0', '0']);
+	} else {
+		arr.unshift(['0', '0', '0', '0', '0', '0', '0', '0', '0']);
+		arr.unshift(['0', '0', '0', '0', '0', '0', '0', '0', '0']);
+	}
 
 	// make the left padding
-	for (let i = 0; i < arr.length; i++) {
-		arr[i].unshift('0');
+	if (padding_size == 1) {
+		for (let i = 0; i < arr.length; i++) {
+			arr[i].unshift('0');
+		}
+	} else {
+		for (let i = 0; i < arr.length; i++) {
+			arr[i].unshift('0');
+		}
+		for (let i = 0; i < arr.length; i++) {
+			arr[i].unshift('0');
+		}
 	}
 
 	return arr;

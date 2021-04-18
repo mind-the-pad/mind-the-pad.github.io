@@ -46,8 +46,8 @@
                 <img src="/image/zero.png">
                 <span>Zero (SAME)</span>
               </button>
-              <button class="tablinks" onclick="selectTab(event, 'zero')">
-                <img src="/image/zero.png">
+              <button class="tablinks" onclick="selectTab(event, 'zero_full')">
+                <img src="/image/zero_full.png">
                 <span>Zero (FULL)</span>
               </button>
 
@@ -145,7 +145,7 @@
                 <p>
                   <img src="/image/zero_scale.png" class="big_icon"> 
                   This is the most common solution to compute an output of the same dimensions as the input.
-                  With a 3 × 3 kernel, the needed padding amount is 1-pixel, and these pixels are filled with zeros.
+                  With a 3 × 3 kernel, the needed padding amount is <b>1-pixel</b>, and these pixels are filled with zeros.
                   The foveation effect is mild, compared with VALID padding.
                   Larger kernel sizes or dilation factors further amplify the foveation effect.
                 </p>
@@ -186,6 +186,60 @@
                   <p>Kernel cells involved:</p>
                   <table id="zero_used" class="summary_div"><tbody></tbody></table>
                   <p>sum = <span id='zero_used_sum'></span></p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <div id="zero_full" class="tabcontent">
+            <h4>Zero Padding (FULL)</h4>
+            <div style='display: flex; flex-direction: column;'>
+              <div class="intro_div">
+                <p>
+                  <img src="/image/zero_full_scale.png" class="big_icon"> 
+                  This is the most common solution to compute an output of the same dimensions as the input.
+                  With a 3 × 3 kernel, the needed padding amount is <b>2-pixel</b>, and these pixels are filled with zeros.
+                  The foveation effect is mild, compared with VALID padding.
+                  Larger kernel sizes or dilation factors further amplify the foveation effect.
+                </p>
+              </div>
+              
+              <div style='display: flex; flex-direction: row;'>
+                <div class="summary_div">
+                  <p><b>Input (left top corner of an image):</b></p>
+                </div>
+
+                <div class="summary_div">
+                  <p><b>#conv_ops each pixel is involved in:</b></p>
+                  <table id="zero_full_totops"><tbody></tbody></table>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <p>
+                <b>Step-by-step illustration</b>
+              </p>
+              <div style="display: flex">
+                <p style="margin: 0px 10px 0px 0px;">
+                  Display conv operations that involve the selected pixel:
+                </p>
+                <input class="play" type="image" onclick="click_previous('zero')" src="icon/previous.png"/>
+                <input class="play" id="zero_full_play" type="image"/>
+                <input class="play" type="image" onclick="click_next('zero')" src="icon/next.png"/>
+              </div>
+                
+              <div style='display: flex; flex-direction: row;'>
+                <div style="display: flex; flex-direction: column;">
+                  <p>Padded Input:</p>
+                  <table id="zero_full_demo" class="summary_div"><tbody></tbody></table>
+                </div>
+
+               <div id="zero_full_overview" class="center_div">
+                  <p>Kernel cells involved:</p>
+                  <table id="zero_full_used" class="summary_div"><tbody></tbody></table>
+                  <p>sum = <span id='zero_full_used_sum'></span></p>
                 </div>
               </div>
             </div>

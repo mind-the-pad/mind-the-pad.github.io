@@ -55,6 +55,7 @@ demo_display = {
  let display_size = {
  	'valid': 3,
  	'zero': 3,
+ 	'zero_full': 3,
  	'circular': 3,
  	'symmetric': 3,
  	'reflect': 3,
@@ -63,6 +64,7 @@ demo_display = {
  }, pad_size = {
  	'valid': 0,
  	'zero': 1,
+ 	'zero_full': 2,
  	'circular': 1,
  	'symmetric': 1,
  	'reflect': 1,
