@@ -87,6 +87,8 @@ demo_display = {
  	d3.selectAll(`#${opt}_used tbody *`).remove();
  	d3.select(`#${opt}_select`).html('___');
  	d3.select(`#${opt}_turn`).html('___');
+ 	d3.select(`#${opt}_used_sum`).html("");
+ 	d3.select('#symmetric_notuniform').style('visibility', 'hidden');
 
  	// set pause clickable
  	d3.select(`#${opt}_play`)
@@ -182,6 +184,8 @@ function initialize_static_table(opt,) {
 				if (select_pixel[opt]) {
 					d3.select(`#${opt}-input-${select_pixel[opt][1]}-${select_pixel[opt][2]}`)
 						.style('background-color', 'white');
+					d3.select(`#${opt}-input-${select_pixel[opt][1]}-${select_pixel[opt][2]}`)
+						.style('font-weight', 'normal');
 					d3.select(`#${opt}-totops-${select_pixel[opt][1]}-${select_pixel[opt][2]}`)
 						.style('background-color', baseColors(colorScale[opt](tot_conv_involved[opt][select_pixel[opt][1]][select_pixel[opt][2]])))
 					d3.select(`#${opt}-demo-${select_pixel[opt][1]+pad_size[opt]}-${select_pixel[opt][2]+pad_size[opt]}`)
@@ -196,6 +200,7 @@ function initialize_static_table(opt,) {
 
 				// highlight
 				this.style.backgroundColor = highlight_background;
+				this.style.fontWeight = 'bold';
 				d3.select(`#${opt}-totops-${ii}-${jj}`)
 					.style('background-color', highlight_background);
 				select_pixel[opt] = [d, ii, jj];
@@ -316,17 +321,30 @@ function update_used_table(opt, ii, jj) {
 	let used_display_to_render = get_tot_conv_at(opt, ii, jj, display_size[opt]);
 
 	// rendering
+	let used_count = 0;
 	used_display_to_render.forEach((row, i) => {
 		row.forEach((val, j) => {
 			d3.select(`#${opt}-used-${i}-${j}`)
 				.style('background-color', demo_background)
 				.html(val);
+			if (val!=="") used_count++;
 		});
 	});
 
 	// sum
 	d3.select(`#${opt}_used_sum`)
-		.html(tot_conv_involved[opt][ii][jj])
+		.html(tot_conv_involved[opt][ii][jj]);
+
+	// check uniform for symmetic
+	if (opt == 'symmetric') {
+		if (used_count !== tot_conv_involved[opt][ii][jj]) {
+			d3.select('#symmetric_notuniform') 
+				.style('visibility', 'visible');
+		} else {
+			d3.select('#symmetric_notuniform') 
+				.style('visibility', 'hidden');
+		}
+	}
 }
 
 function find_the_next_conv(opt) {

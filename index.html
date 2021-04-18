@@ -50,7 +50,7 @@
                 <img src="/image/zero.png">
                 <span>Zero (FULL)</span>
               </button>
-              
+
               <div style="width: 90%; height: 10px; border-bottom: 1px solid grey; 
                 text-align: center; margin: 10px;">
                 <span style="font-size: 14px; background-color: #f1f1f1; color:grey; padding: 0 10px;">
@@ -275,7 +275,10 @@
 
               <div class="summary_div">
                 <p><b>#conv_ops each pixel is involved in:</b></p>
-                <table id="symmetric_totops"><tbody></tbody></table>
+                <table id="symmetric_totops" style="margin-bottom: 0"><tbody></tbody></table>
+                <div class="uniform_hint totops_hint">
+                  <p>The map looks uniform, but the cells in the kernel are not utilized uniformly (e.g. pixel a).</p>
+                </div>
               </div>
             </div>
 
@@ -303,6 +306,9 @@
                   <p>Kernel cells involved:</p>
                   <table id="symmetric_used" class="summary_div"><tbody></tbody></table>
                   <p>sum = <span id='symmetric_used_sum'></span></p>
+                  <div class="uniform_hint" id="symmetric_notuniform" style="visibility: hidden;">
+                    <p>Not all cells are utilized.</p>
+                  </div>
                 </div>
               </div>
 
