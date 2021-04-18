@@ -10,11 +10,13 @@
  			  ['...', '...', '...', '...', '...', '...', '...', '...', '...',], 
  			  ['...', '...', '...', '...', '...', '...', '...', '...', '...',]],
  	// 'zero': [['a', 'b', 'c', '...', '...', ], ['d', 'e', 'f', '...', '...'], ['g', 'h', 'i', '...', '...'], ['...', '...', '...', '...', '...'], ['...', '...', '...', '...', '...']],
- 	'circular': [['a', 'b', 'c', 'd', 'e'], 
- 				 ['p', '...', '...', '...', 'f'], 
- 				 ['o', '...', '...', '...', 'g'], 
- 				 ['n', '...', '...', '...', 'h'], 
- 				 ['m', 'l', 'k', 'j', 'i']],
+ 	'circular': [['a', 'b', 'c', 'd', 'e','f', 'g'], 
+ 				 ['x', '...', '...', '...', '...', '...', 'h'], 
+ 				 ['w', '...', '...', '...', '...', '...', 'i'], 
+ 				 ['v', '...', '...', '...', '...', '...', 'j'], 
+ 				 ['u', '...', '...', '...', '...', '...', 'k'], 
+ 				 ['t', '...', '...', '...', '...', '...', 'l'], 
+ 				 ['s', 'r', 'q', 'p', 'o', 'n', 'm']],
  	// 'symmetric': [['a', 'b', 'c', '...', '...', ], ['d', 'e', 'f', '...', '...'], ['g', 'h', 'i', '...', '...'], ['...', '...', '...', '...', '...'], ['...', '...', '...', '...', '...']],
  	// 'reflect': [['a', 'b', 'c', '...', '...', ], ['d', 'e', 'f', '...', '...'], ['g', 'h', 'i', '...', '...'], ['...', '...', '...', '...', '...'], ['...', '...', '...', '...', '...']],
  	// 'replicate': [['a', 'b', 'c', '...', '...', ], ['d', 'e', 'f', '...', '...'], ['g', 'h', 'i', '...', '...'], ['...', '...', '...', '...', '...'], ['...', '...', '...', '...', '...']],
@@ -32,17 +34,13 @@ demo_display = {
  };
 
  let tot_conv_involved = {
- 	// 'valid': [[1, 2, 3], [2, 4, 6], [3, 6, 9]],
- 	// 'zero': [[4, 6, 6], [6, 9, 9], [6, 9, 9]],
- 	'circular': [[9, 9, 9, 9, 9], 
- 				 [9, 9, 9, 9, 9], 
- 				 [9, 9, 9, 9, 9], 
- 				 [9, 9, 9, 9, 9], 
- 				 [9, 9, 9, 9, 9]],
- 	// 'symmetric': [[9, 9, 9], [9, 9, 9], [9, 9, 9]],
- 	// 'reflect': [[4, 8, 6, 6], [8, 16, 12, 12], [6, 12, 9, 9], [6, 12,9,9]],
- 	// 'replicate': [[36, 24, 30, 30], [24, 16, 20, 20], [30, 20, 25, 20], [30, 20, 25, 20]],
- 	// 'partial_conv': [[6.25, 8.75, 7.5, 7.5 ], [8.75, 12.25, 10.5, 10.5], [7.5, 10.5, 9, 9], [7.5, 10.5, 9, 9]],
+ 	'circular': [[9, 9, 9, 9, 9, 9, 9], 
+ 				 [9, 9, 9, 9, 9, 9, 9], 
+ 				 [9, 9, 9, 9, 9, 9, 9], 
+ 				 [9, 9, 9, 9, 9, 9, 9], 
+ 				 [9, 9, 9, 9, 9, 9, 9], 
+ 				 [9, 9, 9, 9, 9, 9, 9], 
+ 				 [9, 9, 9, 9, 9, 9, 9]],
  }
 
  let used_display = {
@@ -174,13 +172,12 @@ function initialize_static_table(opt,) {
 			.on('click', function(d) {
 				let id = this.id.split('-');
 				let opt = id[0], ii = +id[2], jj = +id[3];
-				if (ii > 4 || jj > 4) {
-					return;
-				}
 				if (opt === 'circular' && input_display[opt][ii][jj] === '...') {
 					return;
+				} else if (opt !== 'circular' & (ii > 4 || jj > 4)) {
+					return;
 				}
-
+				
 				// reset 
 				if (select_pixel[opt]) {
 					d3.select(`#${opt}-input-${select_pixel[opt][1]}-${select_pixel[opt][2]}`)
@@ -228,7 +225,7 @@ function initialize_static_table(opt,) {
 			.on('mouseover', function(d) {
 				let id = this.id.split('-');
 				let opt = id[0], ii = +id[2], jj = +id[3];
-				if (ii > 4 || jj > 4) {
+				if (opt !== 'circular' && (ii > 4 || jj > 4)) {
 					return;
 				}
 
@@ -241,7 +238,7 @@ function initialize_static_table(opt,) {
 			}).on('mouseout', function(d) {
 				let id = this.id.split('-'),
 				 opt = id[0], ii = +id[2], jj = +id[3];
-				if (ii > 4 || jj > 4) {
+				if (opt !== 'circular' && (ii > 4 || jj > 4)) {
 					return;
 				}
 
@@ -522,23 +519,23 @@ function render_demo_border(opt, demo_table) {
 
 	if (opt == 'circular') {
 		// upper border
-		d3.range(1,6).forEach(ix => {
+		d3.range(1,8).forEach(ix => {
 			demo_table.select(`#${opt}-demo-0-${ix}`)
 				.style('border-bottom', '1px solid black');
 		})
 		// left border
-		d3.range(1,6).forEach(ix => {
+		d3.range(1,8).forEach(ix => {
 			demo_table.select(`#${opt}-demo-${ix}-0`)
 				.style('border-right', '1px solid black');
 		})
 		// bottom border
-		d3.range(1,6).forEach(ix => {
-			demo_table.select(`#${opt}-demo-5-${ix}`)
+		d3.range(1,8).forEach(ix => {
+			demo_table.select(`#${opt}-demo-7-${ix}`)
 				.style('border-bottom', '1px solid black');
 		})
 		// right border
-		d3.range(1,6).forEach(ix => {
-			demo_table.select(`#${opt}-demo-${ix}-5`)
+		d3.range(1,8).forEach(ix => {
+			demo_table.select(`#${opt}-demo-${ix}-7`)
 				.style('border-right', '1px solid black');
 		})
 	} else if (pad_size[opt] == 1){
@@ -569,23 +566,23 @@ function render_demo_border(opt, demo_table) {
 function render_input_border(opt, input_table) {
 	if (opt == 'circular') {
 		// upper border
-		d3.range(0,5).forEach(ix => {
+		d3.range(0,7).forEach(ix => {
 			input_table.select(`#${opt}-input-0-${ix}`)
 				.style('border-top', '1px solid black');
 		})
 		// left border
-		d3.range(0,5).forEach(ix => {
+		d3.range(0,7).forEach(ix => {
 			input_table.select(`#${opt}-input-${ix}-0`)
 				.style('border-left', '1px solid black');
 		})
 		// bottom border
-		d3.range(0,5).forEach(ix => {
-			input_table.select(`#${opt}-input-4-${ix}`)
+		d3.range(0,7).forEach(ix => {
+			input_table.select(`#${opt}-input-6-${ix}`)
 				.style('border-bottom', '1px solid black');
 		})
 		// right border
-		d3.range(0,5).forEach(ix => {
-			input_table.select(`#${opt}-input-${ix}-4`)
+		d3.range(0,7).forEach(ix => {
+			input_table.select(`#${opt}-input-${ix}-6`)
 				.style('border-right', '1px solid black');
 		})
 	} else {
