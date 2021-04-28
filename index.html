@@ -21,6 +21,7 @@
       <div class="row">
         <div class="twelve columns" style="margin-top: 40px" id='body-container'>
           <h1>Convolution Can Incur Foveation Effects</h1>
+          <h2>Are all pixels involved in the same number of convolutional operations?</h2>
           <h5>Jun Yuan, Bilal Alsallakh, Narine Kokhlikyan, Vivek Miglani, Orion Rebliz-Richardson</h5>
           <!-- <h6>Rethinking ML Papers - <a href="./rethinkingmlpapers.pdf">supplementary section and accessibility statement</a></h6> --> 
           <p>
@@ -38,6 +39,12 @@
     <div class="widget">
           <div class="tab">
             <div>
+              <div style="width: 90%; height: 10px; margin: 10px;">
+                <span>
+                  Padding Methods
+                </span>
+              </div>
+
               <button class="tablinks active" onclick="selectTab(event, 'valid')">
                 <img src="/image/valid.png">
                 <span>VALID</span>
@@ -54,7 +61,7 @@
               <div style="width: 90%; height: 10px; border-bottom: 1px solid grey; 
                 text-align: center; margin: 10px;">
                 <span style="font-size: 14px; background-color: #f1f1f1; color:grey; padding: 0 10px;">
-                  SAME Padding Below
+                  SAME Padding Alternatives
                 </span>
               </div>
               
@@ -198,10 +205,10 @@
               <div class="intro_div">
                 <p>
                   <img src="/image/zero_full_scale.png" class="big_icon"> 
-                  This is the most common solution to compute an output of the same dimensions as the input.
+                  This padding mode warrants that the filter is applied whenever it overlaps with the input, even partly.
                   With a 3 × 3 kernel, the needed padding amount is <b>2-pixel</b>, and these pixels are filled with zeros.
-                  The foveation effect is mild, compared with VALID padding.
-                  Larger kernel sizes or dilation factors further amplify the foveation effect.
+                  As a result, every pixel is involved in the same number of convolution operations, leading to a uniform foveation map.
+                  However, the output of the convolution is *larger* than its input, which can be problematic (e.g. preventing the use of residual connections or inception modules).
                 </p>
               </div>
               
